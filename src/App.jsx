@@ -1,10 +1,15 @@
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import AvisoLegal from './Paginas/AvisoLegal';
+import InfoContacto from './Paginas/InfoContacto';
+import { Routes, Route } from 'react-router-dom';
+
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import BarraNavegacion from './componentes/BarraNavegacion';
+import Footer from './componentes/Footer';
 
 function App() {
 
@@ -17,10 +22,15 @@ function App() {
         </Col>
       </Row>
       <Row>
-        Para el carrusel
+         
+        <Routes>
+          <Route path="/Paginas/AvisoLegal" element={<AvisoLegal />}></Route>
+          <Route path="/Paginas/InfoContacto" element={<InfoContacto />} ></Route>
+        </Routes>
       </Row>
       <Row>
-        Footer
+        <Footer />
+        
       </Row>
     </Container>
   )

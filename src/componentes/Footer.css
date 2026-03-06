@@ -1,0 +1,20 @@
+.footer-app {
+  width: 100%;
+  padding: 1rem;
+  text-align: center;
+  background-color: #212529;
+}
+
+.footer-texto {
+  margin: 0;
+  color: #f8f9fa;
+  font-size: 0.9rem;
+}
+
+.footer-nav {
+  margin-top: 0.5rem;
+}
+
+.footer-nav .nav-item + .nav-item {
+  margin-left: 1.5rem;
+}
