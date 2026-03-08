@@ -1,7 +1,15 @@
+import BotonFavoritos from "../botonFavoritos/BotonFavoritos";
 import "./TarjetaPelicula.css";
+import { useState } from "react";
 
 export default function TarjetaPelicula(props) {
   const pelicula = props.pelicula;
+
+  const [esFavorito, setEsFavorito] = useState(false);
+
+  const handleToggleFavorito = () => {
+    setEsFavorito(!esFavorito);
+  };
 
   return (
     <div className="col" key={pelicula.id}>
@@ -22,7 +30,10 @@ export default function TarjetaPelicula(props) {
               {pelicula.titulo}
             </p>
             <div className="d-flex align-items-center gap-2">
-              <i className="bi bi-heart" />
+              <BotonFavoritos
+                favorito={esFavorito}
+                alHacerClic={handleToggleFavorito}
+              />
               <span className="badge text-bg-dark border">7.0</span>
             </div>
           </div>
