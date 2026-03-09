@@ -13,25 +13,32 @@ import Footer from "./components/Footer";
 import PaginaPrincipal from "./pages/PaginaPrincipal";
 
 function App() {
-  return (
-    <Container fluid className="p-0">
-      <Row className="g-0">
-        <Col xs={12} className="p-0">
-          <BarraNavegacion />
-        </Col>
-      </Row>
-      <Row>
+ return (
+  <Container fluid className="p-0 d-flex flex-column min-vh-100">
+    <Row className="g-0">
+      <Col xs={12} className="p-0">
+        <BarraNavegacion />
+      </Col>
+    </Row>
+
+    <Row className="flex-grow-1">
+      <Col>
         <Routes>
           <Route path="/" element={<PaginaPrincipal />} />
           <Route path="/Paginas/AvisoLegal" element={<AvisoLegal />} />
           <Route path="/Paginas/InfoContacto" element={<InfoContacto />} />
         </Routes>
-      </Row>
-      <Row>
+      </Col>
+    </Row>
+
+    <Row className="mt-auto">
+      <Col className="p-0">
         <Footer />
-      </Row>
-    </Container>
-  );
+      </Col>
+    </Row>
+
+  </Container>
+)
 }
 
 export default App;
