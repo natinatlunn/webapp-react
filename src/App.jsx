@@ -8,8 +8,8 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-import BarraNavegacion from "./components/BarraNavegacion";
-import Footer from "./components/Footer";
+import BarraNavegacion from "./components/BarraNavegacion/BarraNavegacion";
+import Footer from "./components/Footer/Footer";
 import PaginaPrincipal from "./pages/PaginaPrincipal";
 
 function App() {

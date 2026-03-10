@@ -1,9 +1,9 @@
 import "./BarraNavegacion.css";
 import { useState } from "react";
 import Navbar from "react-bootstrap/Navbar";
-import logo from "../imagenes/logo_principal.png";
-import FiltroBusqueda from "./FiltroBusqueda";
-import InicioSesion from "./InicioSesion";
+import logo from "../../imagenes/logo_principal.png";
+import FiltroBusqueda from "../FiltroBusqueda/FiltroBusqueda";
+import InicioSesion from "../InicioSesion/InicioSesion";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 function BarraNavegacion() {
