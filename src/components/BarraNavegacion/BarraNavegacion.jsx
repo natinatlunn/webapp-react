@@ -6,6 +6,7 @@ import logo from "../../imagenes/logo_principal.png";
 import FiltroBusqueda from "../FiltroBusqueda/FiltroBusqueda";
 import InicioSesion from "../InicioSesion/InicioSesion";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import {Link} from "react-router-dom";
 
 function BarraNavegacion() {
   const [textoBusqueda, setTextoBusqueda] = useState("");
@@ -35,7 +36,9 @@ function BarraNavegacion() {
     <>
       <Navbar className="barra-navegacion w-100">
         <div className="zona-logo">
-          <img src={logo} alt="logo" className="logo-imagen" />
+          <Link to="/" className="enlace-logo">
+            <img src={logo} alt="logo" className="logo-imagen" />
+          </Link> 
         </div>
         <FiltroBusqueda
           valor={textoBusqueda}
