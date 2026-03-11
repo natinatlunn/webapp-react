@@ -1,14 +1,21 @@
 import "./BarraNavegacion.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import logo from "../../imagenes/logo_principal.png";
 import FiltroBusqueda from "../FiltroBusqueda/FiltroBusqueda";
 import InicioSesion from "../InicioSesion/InicioSesion";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import peliculas from "../../data/peliculas.json";
 
 function BarraNavegacion() {
   const [textoBusqueda, setTextoBusqueda] = useState("");
+  const navigate = useNavigate();
+
+  const navegarACategoria = (categoria) => {
+    const categoriaLimpia = categoria.trim();
+    if (!categoriaLimpia) return;
+    navigate(`/categoria/${encodeURIComponent(categoriaLimpia)}`);
+  };
 
   const manejarCambioBusqueda = (evento) => {
     setTextoBusqueda(evento.target.value);
@@ -16,7 +23,12 @@ function BarraNavegacion() {
 
   const manejarEnvioBusqueda = (evento) => {
     evento.preventDefault();
-    console.log("Búsqueda enviada:", textoBusqueda);
+    navegarACategoria(textoBusqueda);
+  };
+
+  const manejarSugerenciaClick = (categoria) => {
+    setTextoBusqueda(categoria);
+    navegarACategoria(categoria);
   };
 
   return (
@@ -29,6 +41,7 @@ function BarraNavegacion() {
           valor={textoBusqueda}
           onCambio={manejarCambioBusqueda}
           onEnviar={manejarEnvioBusqueda}
+          onSugerenciaClick={manejarSugerenciaClick}
         />
         <InicioSesion />
       </Navbar>
