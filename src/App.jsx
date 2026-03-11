@@ -1,17 +1,20 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Routes, Route } from "react-router-dom";
+// páginas
 import AvisoLegal from "./pages/AvisoLegal";
 import InfoContacto from "./pages/InfoContacto";
 import PeliculasCategoria from "./pages/PeliculasCategoria";
-import { Routes, Route } from "react-router-dom";
-
+import PaginaPrincipal from "./pages/PaginaPrincipal";
+import FichaPelicula from "./pages/FichaPelicula";
+// elementos bootstrap
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-
+//componentes
 import BarraNavegacion from "./components/BarraNavegacion/BarraNavegacion";
 import Footer from "./components/Footer/Footer";
-import PaginaPrincipal from "./pages/PaginaPrincipal";
+
 
 function App() {
  return (
@@ -30,7 +33,7 @@ function App() {
           <Route path="/categoria/:categoria" element={<PeliculasCategoria />} />
           <Route path="/Paginas/AvisoLegal" element={<AvisoLegal />} />
           <Route path="/Paginas/InfoContacto" element={<InfoContacto />} />
-          
+          <Route path="/ficha/:id" element={<FichaPelicula />} />
         </Routes>
       </Col>
     </Row>
