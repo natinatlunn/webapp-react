@@ -10,7 +10,7 @@ function Footer() {
     return (
         <footer className="footer-app">
             <p className="footer-texto">© {anioActual} Flixi. Todos los derechos reservados.</p>
-            <Nav className="justify-content-center footer-nav" activeKey="/home">
+            <Nav className="justify-content-center footer-nav">
                 <Nav.Item>
                     <Link to="/Paginas/InfoContacto">Información de contacto</Link> 
                 </Nav.Item>

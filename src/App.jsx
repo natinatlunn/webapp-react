@@ -11,6 +11,7 @@ import Col from "react-bootstrap/Col";
 import BarraNavegacion from "./components/BarraNavegacion/BarraNavegacion";
 import Footer from "./components/Footer/Footer";
 import PaginaPrincipal from "./pages/PaginaPrincipal";
+import Carrusel from "./components/Carrusel/Carrusel";
 
 function App() {
  return (
@@ -23,10 +24,12 @@ function App() {
 
     <Row className="flex-grow-1">
       <Col>
+    
         <Routes>
-          <Route path="/" element={<PaginaPrincipal />} />
+          <Route index element={<PaginaPrincipal />} />
           <Route path="/Paginas/AvisoLegal" element={<AvisoLegal />} />
           <Route path="/Paginas/InfoContacto" element={<InfoContacto />} />
+          
         </Routes>
       </Col>
     </Row>

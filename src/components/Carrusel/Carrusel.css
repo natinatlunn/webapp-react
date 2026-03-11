@@ -1,0 +1,77 @@
+.carrusel {
+  position: relative;
+  width: min(100%, 980px);
+  margin: 1.5rem auto;
+  padding: 0 2.8rem;
+}
+
+.carrusel-container {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  background-color: #111;
+  min-height: 240px;
+}
+
+.carrusel-image {
+  width: 100%;
+  height: clamp(240px, 40vw, 420px);
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.75);
+}
+
+.carrusel-info {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1rem 1.25rem;
+  color: #fff;
+  background: linear-gradient(180deg, transparent 10%, rgba(0, 0, 0, 0.8) 100%);
+}
+
+.carrusel-info h2 {
+  margin: 0;
+  font-size: clamp(1.1rem, 2.5vw, 1.7rem);
+}
+
+.carrusel-info p {
+  margin: 0.5rem 0 0;
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  max-width: 70ch;
+}
+
+.carrusel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.86);
+  color: #1b1b1b;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.carrusel-btn.prev {
+  left: 0.4rem;
+}
+
+.carrusel-btn.next {
+  right: 0.4rem;
+}
+
+@media (max-width: 640px) {
+  .carrusel {
+    padding: 0 2.2rem;
+    margin: 1rem auto;
+  }
+
+  .carrusel-info p {
+    display: none;
+  }
+}
