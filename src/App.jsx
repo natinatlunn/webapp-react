@@ -27,6 +27,7 @@ function App() {
     
         <Routes>
           <Route index element={<PaginaPrincipal />} />
+          {/* <Route path="/categoria/:categoria" element={<PeliculasCategoria />} /> */}
           <Route path="/Paginas/AvisoLegal" element={<AvisoLegal />} />
           <Route path="/Paginas/InfoContacto" element={<InfoContacto />} />
           

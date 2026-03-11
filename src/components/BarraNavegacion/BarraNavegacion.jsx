@@ -5,6 +5,7 @@ import logo from "../../imagenes/logo_principal.png";
 import FiltroBusqueda from "../FiltroBusqueda/FiltroBusqueda";
 import InicioSesion from "../InicioSesion/InicioSesion";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import peliculas from "../../data/peliculas.json";
 
 function BarraNavegacion() {
   const [textoBusqueda, setTextoBusqueda] = useState("");

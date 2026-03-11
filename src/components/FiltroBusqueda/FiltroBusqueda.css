@@ -1,0 +1,22 @@
+.filtro-busqueda{
+  position: relative;
+}
+
+.lista-sugerencias{
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  width: 16.5%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.lista-sugerencias li{
+  padding: 8px;
+  cursor: pointer;
+}
+
+.lista-sugerencias li:hover{
+  background-color: #f2f2f2;
+}

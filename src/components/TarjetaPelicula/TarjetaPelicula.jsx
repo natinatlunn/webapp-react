@@ -39,7 +39,7 @@ export default function TarjetaPelicula(props) {
         </div>
         <div className="d-flex gap-2">
           {pelicula.genero.map((gen) => (
-            <span className="badge rounded-pill text-bg-secondary">
+            <span key={gen} className="badge rounded-pill text-bg-secondary">
               {gen}
             </span>
           ))}
