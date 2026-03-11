@@ -1,12 +1,13 @@
 import TarjetaPelicula from "../tarjetaPelicula/TarjetaPelicula";
 import peliculas from "../../data/peliculas.json";
+import "./ListadoPeliculas.css";
 
 export default function ListadoPeliculas() {
   return (
-    <div className="container-fluid p-4">
-      <div className="row d-flex flex-wrap justify-content-center gap-4 p-3">
+    <div className="peliculas-layout">
+      <div className="peliculas-grid">
         {peliculas.map((pelicula) => {
-          return <TarjetaPelicula pelicula={pelicula} />;
+          return <TarjetaPelicula key={pelicula.id} pelicula={pelicula} />;
         })}
       </div>
     </div>

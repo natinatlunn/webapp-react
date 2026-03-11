@@ -1,0 +1,21 @@
+.peliculas-layout {
+  padding: 1.5rem;
+}
+
+.peliculas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 300px);
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+@media (max-width: 767px) {
+  .peliculas-layout {
+    padding: 1rem;
+  }
+
+  .peliculas-grid {
+    grid-template-columns: minmax(0, min(100%, 300px));
+    gap: 1rem;
+  }
+}

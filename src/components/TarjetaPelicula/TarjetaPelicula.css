@@ -1,5 +1,6 @@
 .card-pelicula {
   width: 300px;
+  max-width: 100%;
 }
 .card-pelicula:hover {
   transform: scale(1.05);
