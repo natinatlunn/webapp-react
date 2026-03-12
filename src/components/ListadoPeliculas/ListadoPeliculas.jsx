@@ -16,7 +16,7 @@ export default function ListadoPeliculas({ peliculasFiltradas }) {
     <div className="peliculas-layout">
 
       <button onClick={handleMostrarPeliculas} className="btn btn-primary mb-3">
-        {mostrar ? "Ocultar películas" : "Mostrar películas"}
+        {mostrar ? "Ocultar películas" : "Mostrar todas las películas"}
       </button>
 
       {mostrar && (

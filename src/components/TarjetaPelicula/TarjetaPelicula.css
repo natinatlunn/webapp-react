@@ -1,11 +1,19 @@
 .card-pelicula {
   width: 300px;
   max-width: 100%;
+  color: inherit;
+  overflow: hidden;
 }
+
 .card-pelicula:hover {
   transform: scale(1.05);
   transition: all 0.3s ease-in-out;
 }
+
+.card-pelicula .card-text {
+  color: #fff;
+}
+
 @keyframes latido {
   0% {
     transform: scale(1);

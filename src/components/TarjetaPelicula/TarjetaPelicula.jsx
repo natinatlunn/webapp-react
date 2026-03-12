@@ -1,23 +1,25 @@
 import BotonFavoritos from "../botonFavoritos/BotonFavoritos";
 import "./TarjetaPelicula.css";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function TarjetaPelicula(props) {
   const pelicula = props.pelicula;
 
   const [esFavorito, setEsFavorito] = useState(false);
 
-  const handleToggleFavorito = () => {
+  const handleToggleFavorito = (evento) => {
+    evento.preventDefault();
+    evento.stopPropagation();
     setEsFavorito(!esFavorito);
   };
 
   return (
-
-    <div className="card card-pelicula">
+    <Link to={`/ficha/${pelicula.id}`} className="card card-pelicula text-decoration-none">
       <img
         src={`/images/${pelicula.portada}`}
         className="card-img-top"
-        alt="..."
+        alt={`Portada de ${pelicula.titulo}`}
       />
       <div
         className="card-body text-bg-dark rounded-bottom"
@@ -37,7 +39,7 @@ export default function TarjetaPelicula(props) {
             <span className="badge text-bg-dark border">7.0</span>
           </div>
         </div>
-        <div className="d-flex gap-2">
+        <div className="d-flex gap-2 flex-wrap">
           {pelicula.genero.map((gen) => (
             <span key={gen} className="badge rounded-pill text-bg-secondary">
               {gen}
@@ -45,6 +47,6 @@ export default function TarjetaPelicula(props) {
           ))}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

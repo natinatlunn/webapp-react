@@ -24,11 +24,7 @@ export default function PeliculasCategoria() {
         Categoría: {categoriaDecodificada || "Sin categoría"}
       </h1>
 
-      {peliculasFiltradas.length > 0 ? (
-        <ListadoPeliculas peliculasFiltradas={peliculasFiltradas} />
-      ) : (
-        <p className="text-center mt-4">No hay películas para esta categoría.</p>
-      )}
+      {peliculasFiltradas.length > 0 ? (<ListadoPeliculas peliculasFiltradas={peliculasFiltradas} />) : ( <p className="text-center mt-4">No hay películas para esta categoría.</p>)}
     </section>
   );
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import peliculas from "../../data/peliculas.json";
 import "./Carrusel.css";
+import { Link } from "react-router-dom";
 
 const Carrusel = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -26,7 +27,10 @@ const Carrusel = () => {
                 ❮
             </button>
 
-            <article className="carrusel-container">
+            <Link
+                to={`/ficha/${peliculaActual.id}`}
+                className="carrusel-container carrusel-link"
+            >
                 <img
                     src={`/images/${peliculaActual.portada}`}
                     alt={peliculaActual.titulo}
@@ -36,7 +40,7 @@ const Carrusel = () => {
                     <h2>{peliculaActual.titulo}</h2>
                     <p>{peliculaActual.sinopsis}</p>
                 </div>
-            </article>
+            </Link>
 
             <button onClick={handleNext} className="carrusel-btn next" aria-label="Siguiente película">
                 ❯
