@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": 0,
     "titulo": "Vengadores: Endgame",
     "fechaEstreno": 20190426,
     "genero": ["Acción", "Ciencia Ficción", "Aventura"],
@@ -8,7 +8,7 @@
     "sinopsis": "Tras los eventos devastadores de Infinity War, los Vengadores restantes intentan revertir las acciones de Thanos y restaurar el equilibrio en el universo cueste lo que cueste."
   },
   {
-    "id": 2,
+    "id": 1,
     "titulo": "Del Revés 2 (Inside Out 2)",
     "fechaEstreno": 20240614,
     "genero": ["Animación", "Familia"],
@@ -16,7 +16,7 @@
     "sinopsis": "Riley entra en la adolescencia y su cuartel general sufre una repentina reforma para hacer espacio a nuevas emociones."
   },
   {
-    "id": 3,
+    "id": 2,
     "titulo": "Super Mario Galaxy: La Pelicula",
     "fechaEstreno": 20260403,
     "genero": ["Animación", "Aventura"],
@@ -24,7 +24,7 @@
     "sinopsis": "Mario y sus amigos viajan a través de diferentes galaxias para detener una amenaza cósmica de proporciones épicas."
   },
   {
-    "id": 4,
+    "id": 3,
     "titulo": "Zootrópolis 2",
     "fechaEstreno": 20251126,
     "genero": ["Animación", "Comedia"],
@@ -32,7 +32,7 @@
     "sinopsis": "Judy Hopps y Nick Wilde regresan para resolver un caso que los llevará a los rincones más profundos de la ciudad animal."
   },
   {
-    "id": 5,
+    "id": 4,
     "titulo": "Deadpool y Lobezno",
     "fechaEstreno": 20240726,
     "genero": ["Acción", "Comedia"],
@@ -40,7 +40,7 @@
     "sinopsis": "Una misión frenética que une al mercenario bocazas con un Logan muy reacio para salvar el universo."
   },
   {
-    "id": 6,
+    "id": 5,
     "titulo": "Scream 7",
     "fechaEstreno": 20260227,
     "genero": ["Terror", "Misterio"],
@@ -48,7 +48,7 @@
     "sinopsis": "Sidney Prescott regresa para enfrentarse a una nueva y más letal versión de Ghostface que acecha a su familia."
   },
   {
-    "id": 7,
+    "id": 6,
     "titulo": "Avatar: Fuego y Ceniza",
     "fechaEstreno": 20251219,
     "genero": ["Ciencia Ficción", "Aventura"],
@@ -56,7 +56,7 @@
     "sinopsis": "Jake Sully y Neytiri conocen a una agresiva tribu de Na'vi vinculada al fuego en las regiones volcánicas de Pandora."
   },
   {
-    "id": 8,
+    "id": 7,
     "titulo": "Spider-Man: Un nuevo día",
     "fechaEstreno": 20260724,
     "genero": ["Acción", "Aventura"],
@@ -64,7 +64,7 @@
     "sinopsis": "Un Peter Parker más maduro intenta equilibrar su vida universitaria con las nuevas amenazas que surgen en las calles de Nueva York."
   },
   {
-    "id": 9,
+    "id": 8,
     "titulo": "Dune: Parte Dos",
     "fechaEstreno": 20240301,
     "genero": ["Ciencia Ficción", "Drama"],
@@ -72,7 +72,7 @@
     "sinopsis": "Paul Atreides se une a Chani y los Fremen mientras busca venganza contra quienes destruyeron a su familia."
   },
   {
-    "id": 10,
+    "id": 9,
     "titulo": "Michael Jackson",
     "fechaEstreno": 20250418,
     "genero": ["Biografía", "Música"],
@@ -80,7 +80,7 @@
     "sinopsis": "Un retrato profundo y complejo de la vida de Michael Jackson, desde sus inicios hasta convertirse en el Rey del Pop."
   },
   {
-    "id": 11,
+    "id": 10,
     "titulo": "Toy Story 5",
     "fechaEstreno": 20260619,
     "genero": ["Animación", "Familia"],
@@ -88,7 +88,7 @@
     "sinopsis": "Los juguetes se enfrentan a un nuevo desafío cuando los niños prefieren las pantallas sobre los juegos físicos."
   },
   {
-    "id": 12,
+    "id": 11,
     "titulo": "Superman",
     "fechaEstreno": 20250711,
     "genero": ["Acción", "Ciencia Ficción"],
@@ -96,7 +96,7 @@
     "sinopsis": "La historia de los orígenes de Superman mientras intenta reconciliar su herencia kryptoniana con su educación humana."
   },
   {
-    "id": 13,
+    "id": 12,
     "titulo": "La Odisea (The Odyssey)",
     "fechaEstreno": 20260717,
     "genero": ["Ciencia Ficción", "Suspense"],
@@ -104,7 +104,7 @@
     "sinopsis": "Un viaje épico a través del tiempo y el espacio dirigido por Christopher Nolan que desafía la percepción humana."
   },
   {
-    "id": 14,
+    "id": 13,
     "titulo": "Vaiana 2 (Moana 2)",
     "fechaEstreno": 20241127,
     "genero": ["Animación", "Aventura"],
@@ -112,7 +112,7 @@
     "sinopsis": "Vaiana recibe una llamada inesperada de sus ancestros y debe viajar a los mares lejanos de Oceanía."
   },
   {
-    "id": 15,
+    "id": 14,
     "titulo": "Jurassic World: El Renacer",
     "fechaEstreno": 20250702,
     "genero": ["Acción", "Aventura"],
@@ -120,7 +120,7 @@
     "sinopsis": "Un equipo de expertos intenta extraer ADN de las tres criaturas más masivas en una isla aislada y peligrosa."
   },
   {
-    "id": 16,
+    "id": 15,
     "titulo": "Proyecto Salvación (Hail Mary)",
     "fechaEstreno": 20260320,
     "genero": ["Ciencia Ficción", "Aventura"],
@@ -129,7 +129,7 @@
     "sinopsis": "Un astronauta despierta solo en una nave espacial sin recordar quién es ni cómo salvar a la Tierra de la extinción."
   },
   {
-    "id": 17,
+    "id": 16,
     "titulo": "Wicked",
     "fechaEstreno": 20241122,
     "genero": ["Musical", "Fantasía"],
@@ -137,7 +137,7 @@
     "sinopsis": "La historia no contada de las brujas de Oz y cómo una joven de piel verde se convirtió en la Malvada Bruja del Oeste."
   },
   {
-    "id": 18,
+    "id": 17,
     "titulo": "Star Wars: The Mandalorian and Grogu",
     "fechaEstreno": 20260522,
     "genero": ["Ciencia Ficción", "Acción"],
@@ -145,7 +145,7 @@
     "sinopsis": "El cazarrecompensas Din Djarin y su aprendiz Grogu se embarcan en una misión vital para la Nueva República."
   },
   {
-    "id": 19,
+    "id": 18,
     "titulo": "Bitelchús Bitelchús",
     "fechaEstreno": 20240906,
     "genero": ["Comedia", "Fantasía"],
@@ -153,7 +153,7 @@
     "sinopsis": "Tras una tragedia familiar, tres generaciones de la familia Deetz regresan a Winter River y abren el portal al Más Allá."
   },
   {
-    "id": 20,
+    "id": 19,
     "titulo": "Romper el Círculo",
     "fechaEstreno": 20240809,
     "genero": ["Drama", "Romance"],
