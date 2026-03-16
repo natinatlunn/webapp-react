@@ -8,7 +8,7 @@ import InicioSesion from "../InicioSesion/InicioSesion";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import {Link} from "react-router-dom";
 
-function BarraNavegacion() {
+function BarraNavegacion({ usuarioActual, onInicioSesion, onCerrarSesion }) {
   const [textoBusqueda, setTextoBusqueda] = useState("");
   const navigate = useNavigate();
 
@@ -48,7 +48,11 @@ function BarraNavegacion() {
           onEnviar={manejarEnvioBusqueda}
           onSugerenciaClick={manejarSugerenciaClick}
         />
-        <InicioSesion />
+        <InicioSesion
+          usuarioActual={usuarioActual}
+          onInicioSesion={onInicioSesion}
+          onCerrarSesion={onCerrarSesion}
+        />
       </Navbar>
     </>
   );
