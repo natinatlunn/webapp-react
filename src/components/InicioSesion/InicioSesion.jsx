@@ -1,4 +1,4 @@
-  import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
   import Button from 'react-bootstrap/Button';
   import Form from 'react-bootstrap/Form';
   import Modal from 'react-bootstrap/Modal';
@@ -34,19 +34,25 @@
     const [password, setPassword] = useState("");
     const submitLogin = (event) => {
       event.preventDefault();
-      const authData = {
-        email: email,
-        password: password,
-        returnSecureToken: true
-      };
-      axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA-LnW6LescdgQqDBqgpMi64eQzLwvcyT0", authData)
-      .then((response) => {
-        console.log("Inicio de sesión exitoso:", response.data);
-        cerrarModal();
-      })
-      .catch((error) => {
-        console.error("Error al iniciar sesión:", error)
-      })
+      const authData = { email, password, returnSecureToken: true };
+
+      axios
+        .post(
+          "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA-LnW6LescdgQqDBqgpMi64eQzLwvcyT0",authData)
+        .then((res) => {
+          const idToken = res.data.idToken;
+          const localId = res.data.localId; 
+
+          return axios.get(
+            "https://webapp-9f2e2-default-rtdb.europe-west1.firebasedatabase.app/usuarios/" + localId +".json?auth=" + idToken
+          );
+        })
+        .then((perfilRes) => {
+          console.log("Perfil:", perfilRes.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
 
     return (
@@ -79,7 +85,7 @@
               <Button variant="secondary" onClick={cerrarModal}>
                 Cancelar
               </Button>
-              <Button variant="primary" type="submit">
+              <Button variant="primary" type="submit" onClick={cerrarModal}>
                 Aceptar
               </Button>
             </Modal.Footer>
