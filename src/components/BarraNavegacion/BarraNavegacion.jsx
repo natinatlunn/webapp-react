@@ -24,12 +24,14 @@ function BarraNavegacion() {
 
   const manejarEnvioBusqueda = (evento) => {
     evento.preventDefault();
-    navegarACategoria(textoBusqueda);
+    const categoriaBuscada = textoBusqueda;
+    navegarACategoria(categoriaBuscada);
+    setTextoBusqueda("");
   };
 
   const manejarSugerenciaClick = (categoria) => {
-    setTextoBusqueda(categoria);
     navegarACategoria(categoria);
+    setTextoBusqueda("");
   };
 
   return (

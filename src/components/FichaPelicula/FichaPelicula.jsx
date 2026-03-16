@@ -21,6 +21,11 @@ function formatearFecha(fechaEstreno) {
 	}).format(fecha);
 }
 
+function formatearDuracion(duracion) {
+	if (!Number.isFinite(duracion)) return "Duración sin confirmar";
+	return `${duracion} min`;
+}
+
 export default function FichaPelicula({ pelicula }) {
 	const anio = obtenerAnio(pelicula.fechaEstreno);
 	const poster = pelicula.portada.replace(".jpg", "_poster.jpg");
@@ -53,6 +58,9 @@ export default function FichaPelicula({ pelicula }) {
 							<span className="badge rounded-pill text-bg-dark">{anio}</span>
 							<span className="badge rounded-pill text-bg-secondary">
 								{formatearFecha(pelicula.fechaEstreno)}
+							</span>
+							<span className="badge rounded-pill text-bg-secondary">
+								{formatearDuracion(pelicula.duracion)}
 							</span>
 						</div>
 
