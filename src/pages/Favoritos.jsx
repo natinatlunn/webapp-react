@@ -2,7 +2,7 @@ import peliculas from "../data/peliculas.json";
 import TarjetaPelicula from "../components/tarjetaPelicula/TarjetaPelicula";
 import "../components/ListadoPeliculas/ListadoPeliculas.css";
 
-function Favoritos({ usuarioActual }) {
+function Favoritos({ usuarioActual, favoritos = [], onToggleFavorito }) {
   if (!usuarioActual) {
     return (
       <section className="peliculas-layout text-center py-5">
@@ -12,13 +12,9 @@ function Favoritos({ usuarioActual }) {
     );
   }
 
-  const idsFavoritos = new Set(
-    (usuarioActual.favoritos ?? [])
-      .filter((favorito) => favorito?.esFavorito)
-      .map((favorito) => Number(favorito.idPeli)),
-  );
+  const idsFavoritos = new Set(favoritos);
 
-  const peliculasFavoritas = peliculas.filter((_, indice) => idsFavoritos.has(indice));
+  const peliculasFavoritas = peliculas.filter((pelicula) => idsFavoritos.has(pelicula.id));
 
   return (
     <section className="peliculas-layout">
@@ -28,7 +24,13 @@ function Favoritos({ usuarioActual }) {
       ) : (
         <div className="peliculas-grid">
           {peliculasFavoritas.map((pelicula) => (
-            <TarjetaPelicula key={pelicula.id} pelicula={pelicula} />
+            <TarjetaPelicula
+              key={pelicula.id}
+              pelicula={pelicula}
+              usuarioPuedeGuardarFavoritos
+              esFavorito
+              onToggleFavorito={onToggleFavorito}
+            />
           ))}
         </div>
       )}

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import ListadoPeliculas from "../components/ListadoPeliculas/ListadoPeliculas";
 import peliculas from "../data/peliculas.json";
 
-export default function PeliculasCategoria() {
+export default function PeliculasCategoria({ usuarioActual, favoritos, onToggleFavorito }) {
   const { categoria = "" } = useParams();
   const categoriaDecodificada = decodeURIComponent(categoria);
   const categoriaNormalizada = categoriaDecodificada.trim().toLowerCase();
@@ -24,7 +24,16 @@ export default function PeliculasCategoria() {
         Categoría: {categoriaDecodificada || "Sin categoría"}
       </h1>
 
-      {peliculasFiltradas.length > 0 ? (<ListadoPeliculas peliculasFiltradas={peliculasFiltradas} />) : ( <p className="text-center mt-4">No hay películas para esta categoría.</p>)}
+      {peliculasFiltradas.length > 0 ? (
+        <ListadoPeliculas
+          peliculasFiltradas={peliculasFiltradas}
+          usuarioActual={usuarioActual}
+          favoritos={favoritos}
+          onToggleFavorito={onToggleFavorito}
+        />
+      ) : (
+        <p className="text-center mt-4">No hay películas para esta categoría.</p>
+      )}
     </section>
   );
 }

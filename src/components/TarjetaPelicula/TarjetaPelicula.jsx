@@ -1,17 +1,24 @@
 import BotonFavoritos from "../botonFavoritos/BotonFavoritos";
 import "./TarjetaPelicula.css";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function TarjetaPelicula(props) {
-  const pelicula = props.pelicula;
-
-  const [esFavorito, setEsFavorito] = useState(false);
+export default function TarjetaPelicula({
+  pelicula,
+  esFavorito = false,
+  onToggleFavorito,
+  usuarioPuedeGuardarFavoritos = false,
+}) {
 
   const handleToggleFavorito = (evento) => {
     evento.preventDefault();
     evento.stopPropagation();
-    setEsFavorito(!esFavorito);
+
+    if (!usuarioPuedeGuardarFavoritos) {
+      window.alert("Debes iniciar sesion para guardar peliculas en favoritos.");
+      return;
+    }
+
+    onToggleFavorito?.(pelicula.id);
   };
 
   return (
@@ -35,6 +42,7 @@ export default function TarjetaPelicula(props) {
             <BotonFavoritos
               favorito={esFavorito}
               alHacerClic={handleToggleFavorito}
+              bloqueado={!usuarioPuedeGuardarFavoritos}
             />
             <span className="badge text-bg-dark border">7.0</span>
           </div>

@@ -3,7 +3,12 @@ import peliculas from "../../data/peliculas.json";
 import "./ListadoPeliculas.css";
 import { useState } from "react";
 
-export default function ListadoPeliculas({ peliculasFiltradas }) {
+export default function ListadoPeliculas({
+  peliculasFiltradas,
+  usuarioActual,
+  favoritos = [],
+  onToggleFavorito,
+}) {
   const peliculasAMostrar = peliculasFiltradas ?? peliculas;
   const [mostrar, setMostrar] = useState(false);
 
@@ -22,7 +27,15 @@ export default function ListadoPeliculas({ peliculasFiltradas }) {
       {mostrar && (
         <div className="peliculas-grid">
           {peliculasAMostrar.map((pelicula) => {
-            return <TarjetaPelicula key={pelicula.id} pelicula={pelicula} />;
+            return (
+              <TarjetaPelicula
+                key={pelicula.id}
+                pelicula={pelicula}
+                usuarioPuedeGuardarFavoritos={Boolean(usuarioActual)}
+                esFavorito={favoritos.includes(pelicula.id)}
+                onToggleFavorito={onToggleFavorito}
+              />
+            );
           })}
         </div>
       )}

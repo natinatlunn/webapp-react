@@ -38,15 +38,16 @@ function InicioSesion({ usuarioActual, onInicioSesion, onCerrarSesion }) {
             localId +
             ".json?auth=" +
             idToken,
-        ).then((perfilRes) => ({ perfilRes, localId }));
+        ).then((perfilRes) => ({ perfilRes, localId, idToken }));
       })
-      .then(({ perfilRes, localId }) => {
+      .then(({ perfilRes, localId, idToken }) => {
         if (!perfilRes.data) {
           throw new Error("No existe perfil para este usuario en la base de datos.");
         }
 
         const usuarioConSesion = {
           uid: localId,
+          idToken,
           ...perfilRes.data,
         };
 
