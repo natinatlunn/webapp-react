@@ -66,10 +66,22 @@
   font-weight: 700;
 }
 
+.ficha-titulo-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.9rem;
+  margin-bottom: 1rem;
+}
+
 .ficha-titulo {
   font-size: clamp(1.8rem, 4vw, 3rem);
   line-height: 1.1;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
+}
+
+.ficha-titulo-row i {
+  font-size: 1.8rem;
 }
 
 .ficha-meta {
@@ -117,6 +129,10 @@
   .ficha-generos,
   .ficha-meta,
   .ficha-acciones {
+    justify-content: center;
+  }
+
+  .ficha-titulo-row {
     justify-content: center;
   }
 

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import "./FichaPelicula.css";
 import ListadoComentarios from "../ListadoComentarios/ListadoComentarios";
+import BotonFavoritos from "../botonFavoritos/BotonFavoritos";
 
 function obtenerAnio(fechaEstreno) {
   return String(fechaEstreno).slice(0, 4);
@@ -27,9 +28,23 @@ function formatearDuracion(duracion) {
   return `${duracion} min`;
 }
 
-export default function FichaPelicula({ pelicula }) {
+export default function FichaPelicula({
+  pelicula,
+  usuarioActual,
+  esFavorito = false,
+  onToggleFavorito,
+}) {
   const anio = obtenerAnio(pelicula.fechaEstreno);
   const poster = pelicula.portada.replace(".jpg", "_poster.jpg");
+
+  const handleToggleFavorito = () => {
+    if (!usuarioActual) {
+      window.alert("Debes iniciar sesion para guardar peliculas en favoritos.");
+      return;
+    }
+
+    onToggleFavorito?.(pelicula.id);
+  };
 
   return (
     <section className="ficha-wrap">
@@ -53,7 +68,14 @@ export default function FichaPelicula({ pelicula }) {
 
           <div className="ficha-info-col">
             <p className="ficha-eyebrow">Ficha de película</p>
-            <h1 className="ficha-titulo">{pelicula.titulo}</h1>
+            <div className="ficha-titulo-row">
+              <h1 className="ficha-titulo">{pelicula.titulo}</h1>
+              <BotonFavoritos
+                favorito={esFavorito}
+                alHacerClic={handleToggleFavorito}
+                bloqueado={!usuarioActual}
+              />
+            </div>
 
             <div className="ficha-meta">
               <span className="badge rounded-pill text-bg-dark">{anio}</span>

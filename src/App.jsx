@@ -163,7 +163,16 @@ function App() {
           />
           <Route path="/paginas/AvisoLegal" element={<AvisoLegal />} />
           <Route path="/paginas/InfoContacto" element={<InfoContacto />} />
-          <Route path="/ficha/:id" element={<FichaPelicula />} />
+          <Route
+            path="/ficha/:id"
+            element={
+              <FichaPelicula
+                usuarioActual={usuarioActual}
+                favoritos={favoritosUsuario}
+                onToggleFavorito={manejarToggleFavorito}
+              />
+            }
+          />
           <Route
             path="/favoritos"
             element={
