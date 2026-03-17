@@ -1,13 +1,32 @@
 import Comentario from "../Comentario/Comentario";
 import { useEffect, useState } from "react";
 import { obtenerComentarios } from "./obtenerComentarios";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import "dayjs/locale/es";
+
+dayjs.extend(relativeTime);
+dayjs.locale("es");
 
 export default function ListadoComentarios(props) {
   const [comentarios, setComentarios] = useState([]);
 
+  const obtenerTiempoRelativo = (fechaRaw) => {
+    if (!fechaRaw) return "";
+    const fecha = fechaRaw.toDate ? fechaRaw.toDate() : fechaRaw;
+    const fechaRelativa = dayjs(fecha).fromNow();
+    return fechaRelativa.charAt(0).toUpperCase() + fechaRelativa.slice(1);
+  };
+
   useEffect(() => {
     obtenerComentarios(props.id).then((comentariosObtenidos) => {
-      setComentarios(comentariosObtenidos);
+      const comentariosConTiempoFormateado = comentariosObtenidos.map(
+        (comentario) => ({
+          ...comentario,
+          fecha: obtenerTiempoRelativo(comentario.fecha),
+        }),
+      );
+      setComentarios(comentariosConTiempoFormateado);
     });
   }, [props.id]);
 
