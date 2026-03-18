@@ -58,6 +58,13 @@ export default function FichaPelicula({
 
       <article className="ficha-card container">
         <div className="ficha-grid">
+          <div className="ficha-boton-favoritos">
+            <BotonFavoritos
+              favorito={esFavorito}
+              alHacerClic={handleToggleFavorito}
+              bloqueado={!usuarioActual}
+            />
+          </div>
           <aside className="ficha-poster-col">
             <img
               src={`/images/posters/${poster}`}
@@ -68,14 +75,7 @@ export default function FichaPelicula({
 
           <div className="ficha-info-col">
             <p className="ficha-eyebrow">Ficha de película</p>
-            <div className="ficha-titulo-row">
-              <h1 className="ficha-titulo">{pelicula.titulo}</h1>
-              <BotonFavoritos
-                favorito={esFavorito}
-                alHacerClic={handleToggleFavorito}
-                bloqueado={!usuarioActual}
-              />
-            </div>
+            <h1 className="ficha-titulo">{pelicula.titulo}</h1>
 
             <div className="ficha-meta">
               <span className="badge rounded-pill text-bg-dark">{anio}</span>
