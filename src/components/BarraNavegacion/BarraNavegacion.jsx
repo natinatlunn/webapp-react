@@ -1,12 +1,11 @@
 import "./BarraNavegacion.css";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Navbar from "react-bootstrap/Navbar";
-import logo from "../../imagenes/logo_principal.png";
+import { Link, useNavigate } from "react-router-dom";
+import { Navbar, Image } from "react-bootstrap";
 import FiltroBusqueda from "../FiltroBusqueda/FiltroBusqueda";
 import InicioSesion from "../InicioSesion/InicioSesion";
+import logo from "../../../public/images/logo_principal.png";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import {Link} from "react-router-dom";
 
 function BarraNavegacion({ usuarioActual, onInicioSesion, onCerrarSesion }) {
   const [textoBusqueda, setTextoBusqueda] = useState("");
@@ -39,8 +38,8 @@ function BarraNavegacion({ usuarioActual, onInicioSesion, onCerrarSesion }) {
       <Navbar className="barra-navegacion w-100">
         <div className="zona-logo">
           <Link to="/" className="enlace-logo">
-            <img src={logo} alt="logo" className="logo-imagen" />
-          </Link> 
+            <Image src={logo} alt="logo" className="logo-imagen" />
+          </Link>
         </div>
         <FiltroBusqueda
           valor={textoBusqueda}
