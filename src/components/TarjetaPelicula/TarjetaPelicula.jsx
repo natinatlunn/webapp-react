@@ -35,7 +35,7 @@ export default function TarjetaPelicula({
       className="card card-pelicula text-decoration-none"
     >
       <img
-        src={`/images/${pelicula.portada}`}
+        src={`/images/portadas/${pelicula.portada}`}
         className="card-img-top"
         alt={`Portada de ${pelicula.titulo}`}
       />
