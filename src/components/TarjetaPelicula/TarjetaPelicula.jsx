@@ -1,6 +1,7 @@
 import BotonFavoritos from "../botonFavoritos/BotonFavoritos";
 import "./TarjetaPelicula.css";
 import { Link } from "react-router-dom";
+import { Card, Badge, Stack, CardBody } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { obtenerPuntuacionMedia } from "../obtenerPuntuacionMedia";
 
@@ -30,44 +31,57 @@ export default function TarjetaPelicula({
     });
   }, [pelicula.id]);
   return (
-    <Link
+    <Card
+      as={Link}
       to={`/ficha/${pelicula.id}`}
-      className="card card-pelicula text-decoration-none"
+      className="card-pelicula text-decoration-none"
     >
-      <img
+      <Card.Img
+        variant="top"
         src={`/images/portadas/${pelicula.portada}`}
-        className="card-img-top"
         alt={`Portada de ${pelicula.titulo}`}
       />
-      <div
-        className="card-body text-bg-dark rounded-bottom"
+      <Card.Body
+        className="text-bg-dark rounded-bottom"
         style={{
           backgroundImage: "var(--bs-gradient)",
         }}
       >
-        <div className="d-flex justify-content-between align-items-start gap-1">
-          <p className="card-text text-truncate" title={pelicula.titulo}>
+        <Stack
+          direction="horizontal"
+          gap={1}
+          className="justify-content-between align-items-start"
+        >
+          <Card.Text className="text-truncate" title={pelicula.titulo}>
             {pelicula.titulo}
-          </p>
-          <div className="d-flex align-items-center gap-2">
-            <BotonFavoritos
-              favorito={esFavorito}
-              alHacerClic={handleToggleFavorito}
-              bloqueado={!usuarioPuedeGuardarFavoritos}
-            />
-            <span className="badge text-bg-dark border">
+          </Card.Text>
+
+          <Stack
+            direction="horizontal"
+            gap={2}
+            className="align-items-center flex-shrink-0"
+          >
+            <div onClick={(e) => e.preventDefault()}>
+              <BotonFavoritos
+                favorito={esFavorito}
+                alHacerClic={handleToggleFavorito}
+                bloqueado={!usuarioPuedeGuardarFavoritos}
+              />
+            </div>
+            <Badge bg="dark" className="border">
               {Number(puntuacionMedia).toFixed(1)}
-            </span>
-          </div>
-        </div>
-        <div className="d-flex gap-2 flex-wrap">
+            </Badge>
+          </Stack>
+        </Stack>
+
+        <Stack direction="horizontal" gap={2} className="flex-wrap">
           {pelicula.genero.map((gen) => (
-            <span key={gen} className="badge rounded-pill text-bg-secondary">
+            <Badge key={gen} pill bg="secondary">
               {gen}
-            </span>
+            </Badge>
           ))}
-        </div>
-      </div>
-    </Link>
+        </Stack>
+      </Card.Body>
+    </Card>
   );
 }
