@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { guardarComentario } from "./guardarComentario";
+import { guardarComentarioYActualizarPuntuacionMedia } from "./guardarComentarioYActualizarPuntuacionMedia";
 
 export default function NuevoComentario(props) {
   const [puntuacion, setPuntuacion] = useState(0);
@@ -16,14 +16,16 @@ export default function NuevoComentario(props) {
       puntuacion: puntuacion,
     };
 
-    guardarComentario(
+    guardarComentarioYActualizarPuntuacionMedia(
       props.idPelicula,
+      props.comentarios,
       nuevoComentario,
       props.usuarioAutenticado,
     ).then(() => {
       setComentario("");
       setPuntuacion(0);
       props.setActualizarComentarios(true);
+      props.setActualizarComentariosPuntuacion(true);
     });
   };
 

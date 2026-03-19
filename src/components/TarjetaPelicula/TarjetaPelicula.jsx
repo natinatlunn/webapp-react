@@ -1,6 +1,8 @@
 import BotonFavoritos from "../botonFavoritos/BotonFavoritos";
 import "./TarjetaPelicula.css";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { obtenerPuntuacionMedia } from "../obtenerPuntuacionMedia";
 
 export default function TarjetaPelicula({
   pelicula,
@@ -8,6 +10,7 @@ export default function TarjetaPelicula({
   onToggleFavorito,
   usuarioPuedeGuardarFavoritos = false,
 }) {
+  const [puntuacionMedia, setPuntuacionMedia] = useState(0);
 
   const handleToggleFavorito = (evento) => {
     evento.preventDefault();
@@ -21,8 +24,16 @@ export default function TarjetaPelicula({
     onToggleFavorito?.(pelicula.id);
   };
 
+  useEffect(() => {
+    obtenerPuntuacionMedia(pelicula.id).then((media) => {
+      setPuntuacionMedia(media);
+    });
+  }, [pelicula.id]);
   return (
-    <Link to={`/ficha/${pelicula.id}`} className="card card-pelicula text-decoration-none">
+    <Link
+      to={`/ficha/${pelicula.id}`}
+      className="card card-pelicula text-decoration-none"
+    >
       <img
         src={`/images/${pelicula.portada}`}
         className="card-img-top"
@@ -44,7 +55,9 @@ export default function TarjetaPelicula({
               alHacerClic={handleToggleFavorito}
               bloqueado={!usuarioPuedeGuardarFavoritos}
             />
-            <span className="badge text-bg-dark border">7.0</span>
+            <span className="badge text-bg-dark border">
+              {Number(puntuacionMedia).toFixed(1)}
+            </span>
           </div>
         </div>
         <div className="d-flex gap-2 flex-wrap">

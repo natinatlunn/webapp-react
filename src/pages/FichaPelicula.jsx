@@ -2,7 +2,11 @@ import { Link, useParams } from "react-router-dom";
 import FichaPeliculaDetalle from "../components/FichaPelicula/FichaPelicula";
 import peliculas from "../data/peliculas.json";
 
-export default function FichaPelicula({ usuarioActual, favoritos = [], onToggleFavorito }) {
+export default function FichaPelicula({
+  usuarioActual,
+  favoritos = [],
+  onToggleFavorito,
+}) {
   const { id = "" } = useParams();
   const pelicula = peliculas.find((item) => item.id === Number(id));
 

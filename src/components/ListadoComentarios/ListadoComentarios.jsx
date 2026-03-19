@@ -46,8 +46,10 @@ export default function ListadoComentarios(props) {
       <h3 className="text-white mb-4">Opiniones de usuarios</h3>
       <NuevoComentario
         idPelicula={props.id}
+        comentarios={comentarios}
         usuarioAutenticado={props.usuarioAutenticado}
         setActualizarComentarios={setActualizarComentarios}
+        setActualizarComentariosPuntuacion={props.setActualizarPuntuacion}
       />
       <div className="opiniones-lista">
         {comentarios.length > 0 ? (

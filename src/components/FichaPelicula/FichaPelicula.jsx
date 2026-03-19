@@ -3,6 +3,8 @@ import "./FichaPelicula.css";
 import ListadoComentarios from "../ListadoComentarios/ListadoComentarios";
 import BotonFavoritos from "../botonFavoritos/BotonFavoritos";
 import { Col, Row } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { obtenerPuntuacionMedia } from "../obtenerPuntuacionMedia";
 
 function obtenerAnio(fechaEstreno) {
   return String(fechaEstreno).slice(0, 4);
@@ -29,12 +31,14 @@ function formatearDuracion(duracion) {
   return `${duracion} min`;
 }
 
-export default function FichaPelicula({
+export default function FichaPeliculaDetalle({
   pelicula,
   usuarioActual,
   esFavorito = false,
   onToggleFavorito,
 }) {
+  const [puntuacionMedia, setPuntuacionMedia] = useState(null);
+  const [actualizarPuntuacion, setActualizarPuntuacion] = useState(false);
   const anio = obtenerAnio(pelicula.fechaEstreno);
   const poster = pelicula.portada.replace(".jpg", "_poster.jpg");
 
@@ -46,6 +50,13 @@ export default function FichaPelicula({
 
     onToggleFavorito?.(pelicula.id);
   };
+
+  useEffect(() => {
+    obtenerPuntuacionMedia(pelicula.id).then((media) => {
+      setPuntuacionMedia(media);
+      setActualizarPuntuacion(false);
+    });
+  }, [pelicula.id, actualizarPuntuacion]);
 
   return (
     <section className="ficha-wrap">
@@ -112,6 +123,9 @@ export default function FichaPelicula({
               >
                 Ver tráiler
               </a>
+              <span className="badge text-bg-dark border">
+                {Number(puntuacionMedia).toFixed(1)}
+              </span>
             </div>
           </div>
         </div>
@@ -120,6 +134,7 @@ export default function FichaPelicula({
             <ListadoComentarios
               id={pelicula.id}
               usuarioAutenticado={usuarioActual}
+              setActualizarPuntuacion={setActualizarPuntuacion}
             />
           </Col>
           <Col></Col>
