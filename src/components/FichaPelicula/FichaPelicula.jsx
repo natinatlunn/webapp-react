@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "./FichaPelicula.css";
 import ListadoComentarios from "../ListadoComentarios/ListadoComentarios";
 import BotonFavoritos from "../botonFavoritos/BotonFavoritos";
+import { Col, Row } from "react-bootstrap";
 
 function obtenerAnio(fechaEstreno) {
   return String(fechaEstreno).slice(0, 4);
@@ -114,8 +115,15 @@ export default function FichaPelicula({
             </div>
           </div>
         </div>
-
-        <ListadoComentarios id={pelicula.id} />
+        <Row>
+          <Col md={7}>
+            <ListadoComentarios
+              id={pelicula.id}
+              usuarioAutenticado={usuarioActual}
+            />
+          </Col>
+          <Col></Col>
+        </Row>
       </article>
     </section>
   );
