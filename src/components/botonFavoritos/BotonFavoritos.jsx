@@ -1,15 +1,17 @@
+import { useContext } from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import AutContext from "../../store/AutContext";
 
-export default function BotonFavoritos({
-  favorito,
-  alHacerClic,
-  bloqueado = false,
-}) {
+export default function BotonFavoritos({ favorito, alHacerClic }) {
+  const authContext = useContext(AutContext);
+
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
-      {bloqueado
+      {!authContext.usuarioLogueado
         ? "Inicia sesión para guardar favoritos"
-        : "Guardar en favoritos"}
+        : favorito
+          ? "Quitar de favoritos"
+          : "Guardar en favoritos"}
     </Tooltip>
   );
 
@@ -21,11 +23,11 @@ export default function BotonFavoritos({
     >
       <i
         className={`bi ${favorito ? "bi-heart-fill text-danger" : "bi-heart"} ${
-          bloqueado ? "text-secondary" : ""
+          authContext.usuarioLogueado ? "" : "text-secondary"
         }`}
-        onClick={bloqueado ? "" : alHacerClic}
+        onClick={authContext.usuarioLogueado ? alHacerClic : undefined}
         style={{
-          cursor: bloqueado ? "not-allowed" : "pointer",
+          cursor: authContext.usuarioLogueado ? "pointer" : "not-allowed",
           transition: "all 0.2s",
         }}
       />

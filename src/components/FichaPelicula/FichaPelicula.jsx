@@ -3,8 +3,9 @@ import "./FichaPelicula.css";
 import ListadoComentarios from "../ListadoComentarios/ListadoComentarios";
 import BotonFavoritos from "../botonFavoritos/BotonFavoritos";
 import { Col, Row } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { obtenerPuntuacionMedia } from "../obtenerPuntuacionMedia";
+import AutContext from "../../store/AutContext";
 
 function obtenerAnio(fechaEstreno) {
   return String(fechaEstreno).slice(0, 4);
@@ -33,7 +34,6 @@ function formatearDuracion(duracion) {
 
 export default function FichaPeliculaDetalle({
   pelicula,
-  usuarioActual,
   esFavorito = false,
   onToggleFavorito,
 }) {
@@ -41,9 +41,10 @@ export default function FichaPeliculaDetalle({
   const [actualizarPuntuacion, setActualizarPuntuacion] = useState(false);
   const anio = obtenerAnio(pelicula.fechaEstreno);
   const poster = pelicula.portada.replace(".jpg", "_poster.jpg");
+  const authContext = useContext(AutContext);
 
   const handleToggleFavorito = () => {
-    if (!usuarioActual) {
+    if (!authContext.usuarioLogueado) {
       window.alert("Debes iniciar sesion para guardar peliculas en favoritos.");
       return;
     }
@@ -62,7 +63,7 @@ export default function FichaPeliculaDetalle({
     <section className="ficha-wrap">
       <div className="ficha-bg" aria-hidden="true">
         <img
-          src={`/images/${pelicula.portada}`}
+          src={`/images/portadas/${pelicula.portada}`}
           alt=""
           className="ficha-bg-imagen"
         />
@@ -74,7 +75,6 @@ export default function FichaPeliculaDetalle({
             <BotonFavoritos
               favorito={esFavorito}
               alHacerClic={handleToggleFavorito}
-              bloqueado={!usuarioActual}
             />
           </div>
           <aside className="ficha-poster-col">
@@ -133,7 +133,6 @@ export default function FichaPeliculaDetalle({
           <Col md={7}>
             <ListadoComentarios
               id={pelicula.id}
-              usuarioAutenticado={usuarioActual}
               setActualizarPuntuacion={setActualizarPuntuacion}
             />
           </Col>

@@ -1,9 +1,13 @@
 import peliculas from "../data/peliculas.json";
 import TarjetaPelicula from "../components/tarjetaPelicula/TarjetaPelicula";
 import "../components/ListadoPeliculas/ListadoPeliculas.css";
+import { useContext } from "react";
+import AutContext from "../store/AutContext";
 
-function Favoritos({ usuarioActual, favoritos = [], onToggleFavorito }) {
-  if (!usuarioActual) {
+function Favoritos({ favoritos = [], onToggleFavorito }) {
+  const authContext = useContext(AutContext);
+
+  if (!authContext.usuarioLogueado) {
     return (
       <section className="peliculas-layout text-center py-5">
         <h1>Favoritos</h1>
@@ -14,7 +18,9 @@ function Favoritos({ usuarioActual, favoritos = [], onToggleFavorito }) {
 
   const idsFavoritos = new Set(favoritos);
 
-  const peliculasFavoritas = peliculas.filter((pelicula) => idsFavoritos.has(pelicula.id));
+  const peliculasFavoritas = peliculas.filter((pelicula) =>
+    idsFavoritos.has(pelicula.id),
+  );
 
   return (
     <section className="peliculas-layout">

@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { guardarComentarioYActualizarPuntuacionMedia } from "./guardarComentarioYActualizarPuntuacionMedia";
+import AutContext from "../../store/AutContext";
 
 export default function NuevoComentario(props) {
   const [puntuacion, setPuntuacion] = useState(0);
   const [comentario, setComentario] = useState("");
+
+  const authContext = useContext(AutContext);
 
   const enviarComentario = (event) => {
     event.preventDefault();
     if (puntuacion === 0) return alert("Por favor, selecciona una puntuación");
 
     const nuevoComentario = {
-      usuario: props.usuarioAutenticado.nombre_usuario,
+      usuario: authContext.nombreUsuario,
       fecha: new Date(),
       descripcion: comentario,
       puntuacion: puntuacion,
@@ -20,7 +23,7 @@ export default function NuevoComentario(props) {
       props.idPelicula,
       props.comentarios,
       nuevoComentario,
-      props.usuarioAutenticado,
+      authContext.idToken,
     ).then(() => {
       setComentario("");
       setPuntuacion(0);
@@ -59,7 +62,7 @@ export default function NuevoComentario(props) {
         <button
           type="submit"
           className="btn btn-warning fw-bold"
-          disabled={!props.usuarioAutenticado}
+          disabled={!authContext.usuarioLogueado}
         >
           Comentar
         </button>

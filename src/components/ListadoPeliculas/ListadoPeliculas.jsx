@@ -5,7 +5,6 @@ import { useState } from "react";
 
 export default function ListadoPeliculas({
   peliculasFiltradas,
-  usuarioActual,
   favoritos = [],
   onToggleFavorito,
 }) {
@@ -16,10 +15,8 @@ export default function ListadoPeliculas({
     setMostrar(!mostrar);
   }
 
-
   return (
     <div className="peliculas-layout">
-
       <button onClick={handleMostrarPeliculas} className="btn btn-primary mb-3">
         {mostrar ? "Ocultar películas" : "Mostrar todas las películas"}
       </button>
@@ -31,7 +28,6 @@ export default function ListadoPeliculas({
               <TarjetaPelicula
                 key={pelicula.id}
                 pelicula={pelicula}
-                usuarioPuedeGuardarFavoritos={Boolean(usuarioActual)}
                 esFavorito={favoritos.includes(pelicula.id)}
                 onToggleFavorito={onToggleFavorito}
               />
@@ -39,8 +35,6 @@ export default function ListadoPeliculas({
           })}
         </div>
       )}
-
-
     </div>
   );
 }

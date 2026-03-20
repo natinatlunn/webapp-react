@@ -7,7 +7,7 @@ import InicioSesion from "../InicioSesion/InicioSesion";
 import logo from "../../../public/images/logo_principal.png";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
-function BarraNavegacion({ usuarioActual, onInicioSesion, onCerrarSesion }) {
+function BarraNavegacion({ onInicioSesion, onCerrarSesion }) {
   const [textoBusqueda, setTextoBusqueda] = useState("");
   const navigate = useNavigate();
 
@@ -48,7 +48,6 @@ function BarraNavegacion({ usuarioActual, onInicioSesion, onCerrarSesion }) {
           onSugerenciaClick={manejarSugerenciaClick}
         />
         <InicioSesion
-          usuarioActual={usuarioActual}
           onInicioSesion={onInicioSesion}
           onCerrarSesion={onCerrarSesion}
         />

@@ -2,22 +2,23 @@ import BotonFavoritos from "../botonFavoritos/BotonFavoritos";
 import "./TarjetaPelicula.css";
 import { Link } from "react-router-dom";
 import { Card, Badge, Stack, CardBody } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { obtenerPuntuacionMedia } from "../obtenerPuntuacionMedia";
+import AutContext from "../../store/AutContext";
 
 export default function TarjetaPelicula({
   pelicula,
   esFavorito = false,
   onToggleFavorito,
-  usuarioPuedeGuardarFavoritos = false,
 }) {
   const [puntuacionMedia, setPuntuacionMedia] = useState(0);
+  const authContext = useContext(AutContext);
 
   const handleToggleFavorito = (evento) => {
     evento.preventDefault();
     evento.stopPropagation();
 
-    if (!usuarioPuedeGuardarFavoritos) {
+    if (!authContext.usuarioLogueado) {
       window.alert("Debes iniciar sesion para guardar peliculas en favoritos.");
       return;
     }
@@ -65,7 +66,6 @@ export default function TarjetaPelicula({
               <BotonFavoritos
                 favorito={esFavorito}
                 alHacerClic={handleToggleFavorito}
-                bloqueado={!usuarioPuedeGuardarFavoritos}
               />
             </div>
             <Badge bg="dark" className="border">

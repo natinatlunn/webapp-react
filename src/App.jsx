@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import axios from "axios";
 import { Routes, Route } from "react-router-dom";
+import AutContext from "./store/AutContext";
 // páginas
 import AvisoLegal from "./pages/AvisoLegal";
 import InfoContacto from "./pages/InfoContacto";
@@ -61,140 +62,141 @@ function normalizarUsuario(usuario) {
   };
 }
 
-
 function App() {
   const [usuarioActual, setUsuarioActual] = useState(() => {
-  const sesionGuardada = localStorage.getItem("usuarioActual");
+    const sesionGuardada = localStorage.getItem("usuarioActual");
 
-  if (!sesionGuardada) {
-    return null;
-  }
+    if (!sesionGuardada) {
+      return null;
+    }
 
-  try {
-    return normalizarUsuario(JSON.parse(sesionGuardada));
-  } catch {
-    localStorage.removeItem("usuarioActual");
-    return null;
-  }
- });
+    try {
+      return normalizarUsuario(JSON.parse(sesionGuardada));
+    } catch {
+      localStorage.removeItem("usuarioActual");
+      return null;
+    }
+  });
 
- const manejarInicioSesion = (usuario) => {
-  const usuarioNormalizado = normalizarUsuario(usuario);
-  setUsuarioActual(usuarioNormalizado);
-  localStorage.setItem("usuarioActual", JSON.stringify(usuarioNormalizado));
- };
-
- const manejarCerrarSesion = () => {
-  setUsuarioActual(null);
-  localStorage.removeItem("usuarioActual");
- };
-
- const manejarToggleFavorito = async (idPelicula) => {
-  if (!usuarioActual?.uid || !Number.isInteger(idPelicula)) {
-    return;
-  }
-
-  const favoritosActuales = normalizarFavoritos(usuarioActual.favoritos);
-  const yaEsFavorita = favoritosActuales.includes(idPelicula);
-
-  const nuevosFavoritos = yaEsFavorita
-    ? favoritosActuales.filter((id) => id !== idPelicula)
-    : [...favoritosActuales, idPelicula];
-
-  const usuarioActualizado = {
-    ...usuarioActual,
-    favoritos: nuevosFavoritos,
+  const manejarInicioSesion = (usuario) => {
+    const usuarioNormalizado = normalizarUsuario(usuario);
+    setUsuarioActual(usuarioNormalizado);
+    localStorage.setItem("usuarioActual", JSON.stringify(usuarioNormalizado));
   };
 
-  setUsuarioActual(usuarioActualizado);
-  localStorage.setItem("usuarioActual", JSON.stringify(usuarioActualizado));
+  const manejarCerrarSesion = () => {
+    setUsuarioActual(null);
+    localStorage.removeItem("usuarioActual");
+  };
 
-  try {
-    const authQuery = usuarioActual.idToken
-      ? `?auth=${usuarioActual.idToken}`
-      : "";
+  const manejarToggleFavorito = async (idPelicula) => {
+    if (!usuarioActual?.uid || !Number.isInteger(idPelicula)) {
+      return;
+    }
 
-    await axios.patch(
-      `${FIREBASE_RTDB_BASE_URL}/usuarios/${usuarioActual.uid}.json${authQuery}`,
-      { favoritos: nuevosFavoritos },
-    );
-  } catch (error) {
-    console.error("No se pudo guardar favoritos en Firebase", error);
-  }
- };
+    const favoritosActuales = normalizarFavoritos(usuarioActual.favoritos);
+    const yaEsFavorita = favoritosActuales.includes(idPelicula);
 
- const favoritosUsuario = normalizarFavoritos(usuarioActual?.favoritos);
+    const nuevosFavoritos = yaEsFavorita
+      ? favoritosActuales.filter((id) => id !== idPelicula)
+      : [...favoritosActuales, idPelicula];
 
- return (
-  <Container fluid className="p-0 d-flex flex-column min-vh-100">
-    <Row className="g-0">
-      <Col xs={12} className="p-0">
-        <BarraNavegacion
-          usuarioActual={usuarioActual}
-          onInicioSesion={manejarInicioSesion}
-          onCerrarSesion={manejarCerrarSesion}
-        />
-      </Col>
-    </Row>
+    const usuarioActualizado = {
+      ...usuarioActual,
+      favoritos: nuevosFavoritos,
+    };
 
-    <Row className="flex-grow-1">
-      <Col>
-    
-        <Routes>
-          <Route
-            index
-            element={
-              <PaginaPrincipal
-                usuarioActual={usuarioActual}
-                favoritos={favoritosUsuario}
-                onToggleFavorito={manejarToggleFavorito}
+    setUsuarioActual(usuarioActualizado);
+    localStorage.setItem("usuarioActual", JSON.stringify(usuarioActualizado));
+
+    try {
+      const authQuery = usuarioActual.idToken
+        ? `?auth=${usuarioActual.idToken}`
+        : "";
+
+      await axios.patch(
+        `${FIREBASE_RTDB_BASE_URL}/usuarios/${usuarioActual.uid}.json${authQuery}`,
+        { favoritos: nuevosFavoritos },
+      );
+    } catch (error) {
+      console.error("No se pudo guardar favoritos en Firebase", error);
+    }
+  };
+
+  const favoritosUsuario = normalizarFavoritos(usuarioActual?.favoritos);
+
+  return (
+    <AutContext.Provider
+      value={{
+        usuarioLogueado: usuarioActual ? true : false,
+        idToken: usuarioActual?.idToken,
+        nombre: usuarioActual?.nombre,
+        nombreUsuario: usuarioActual?.nombre_usuario,
+      }}
+    >
+      <Container fluid className="p-0 d-flex flex-column min-vh-100">
+        <Row className="g-0">
+          <Col xs={12} className="p-0">
+            <BarraNavegacion
+              onInicioSesion={manejarInicioSesion}
+              onCerrarSesion={manejarCerrarSesion}
+            />
+          </Col>
+        </Row>
+
+        <Row className="flex-grow-1">
+          <Col>
+            <Routes>
+              <Route
+                index
+                element={
+                  <PaginaPrincipal
+                    favoritos={favoritosUsuario}
+                    onToggleFavorito={manejarToggleFavorito}
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path="/categoria/:categoria"
-            element={
-              <PeliculasCategoria
-                usuarioActual={usuarioActual}
-                favoritos={favoritosUsuario}
-                onToggleFavorito={manejarToggleFavorito}
+              <Route
+                path="/categoria/:categoria"
+                element={
+                  <PeliculasCategoria
+                    favoritos={favoritosUsuario}
+                    onToggleFavorito={manejarToggleFavorito}
+                  />
+                }
               />
-            }
-          />
-          <Route path="/paginas/AvisoLegal" element={<AvisoLegal />} />
-          <Route path="/paginas/InfoContacto" element={<InfoContacto />} />
-          <Route
-            path="/ficha/:id"
-            element={
-              <FichaPelicula
-                usuarioActual={usuarioActual}
-                favoritos={favoritosUsuario}
-                onToggleFavorito={manejarToggleFavorito}
+              <Route path="/paginas/AvisoLegal" element={<AvisoLegal />} />
+              <Route path="/paginas/InfoContacto" element={<InfoContacto />} />
+              <Route
+                path="/ficha/:id"
+                element={
+                  <FichaPelicula
+                    favoritos={favoritosUsuario}
+                    onToggleFavorito={manejarToggleFavorito}
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path="/favoritos"
-            element={
-              <Favoritos
-                usuarioActual={usuarioActual}
-                favoritos={favoritosUsuario}
-                onToggleFavorito={manejarToggleFavorito}
+              <Route
+                path="/favoritos"
+                element={
+                  <Favoritos
+                    favoritos={favoritosUsuario}
+                    onToggleFavorito={manejarToggleFavorito}
+                  />
+                }
               />
-            }
-          />
-        </Routes>
-      </Col>
-    </Row>
+            </Routes>
+          </Col>
+        </Row>
 
-    <Row className="mt-auto">
-      <Col className="p-0">
-        <Footer />
-      </Col>
-    </Row>
-
-  </Container>
-)
+        <Row className="mt-auto">
+          <Col className="p-0">
+            <Footer />
+          </Col>
+        </Row>
+      </Container>
+    </AutContext.Provider>
+  );
 }
 
 export default App;

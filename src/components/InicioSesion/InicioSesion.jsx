@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { Link } from "react-router-dom";
+import AutContext from "../../store/AutContext";
 
-function InicioSesion({ usuarioActual, onInicioSesion, onCerrarSesion }) {
+function InicioSesion({ onInicioSesion, onCerrarSesion }) {
   const [mostrarModal, setMostrarModal] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorLogin, setErrorLogin] = useState("");
+
+  const authContext = useContext(AutContext);
 
   const abrirModal = () => setMostrarModal(true);
   const cerrarModal = () => {
@@ -33,16 +36,20 @@ function InicioSesion({ usuarioActual, onInicioSesion, onCerrarSesion }) {
         const idToken = res.data.idToken;
         const localId = res.data.localId;
 
-        return axios.get(
-          "https://webapp-9f2e2-default-rtdb.europe-west1.firebasedatabase.app/usuarios/" +
-            localId +
-            ".json?auth=" +
-            idToken,
-        ).then((perfilRes) => ({ perfilRes, localId, idToken }));
+        return axios
+          .get(
+            "https://webapp-9f2e2-default-rtdb.europe-west1.firebasedatabase.app/usuarios/" +
+              localId +
+              ".json?auth=" +
+              idToken,
+          )
+          .then((perfilRes) => ({ perfilRes, localId, idToken }));
       })
       .then(({ perfilRes, localId, idToken }) => {
         if (!perfilRes.data) {
-          throw new Error("No existe perfil para este usuario en la base de datos.");
+          throw new Error(
+            "No existe perfil para este usuario en la base de datos.",
+          );
         }
 
         const usuarioConSesion = {
@@ -51,7 +58,6 @@ function InicioSesion({ usuarioActual, onInicioSesion, onCerrarSesion }) {
           ...perfilRes.data,
         };
 
-        console.log("Perfil:", usuarioConSesion);
         onInicioSesion(usuarioConSesion);
         setEmail("");
         setPassword("");
@@ -63,7 +69,7 @@ function InicioSesion({ usuarioActual, onInicioSesion, onCerrarSesion }) {
       });
   };
 
-  if (usuarioActual) {
+  if (authContext.usuarioLogueado) {
     return (
       <Dropdown align="end">
         <Dropdown.Toggle
@@ -76,7 +82,7 @@ function InicioSesion({ usuarioActual, onInicioSesion, onCerrarSesion }) {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          <Dropdown.Header>Bienvenido, {usuarioActual.nombre}</Dropdown.Header>
+          <Dropdown.Header>Bienvenido, {authContext.nombre}</Dropdown.Header>
           <Dropdown.Item as={Link} to="/favoritos">
             Peliculas favoritas
           </Dropdown.Item>
@@ -122,7 +128,9 @@ function InicioSesion({ usuarioActual, onInicioSesion, onCerrarSesion }) {
                 placeholder="********"
               />
             </Form.Group>
-            {errorLogin && <p className="text-danger mt-3 mb-0">{errorLogin}</p>}
+            {errorLogin && (
+              <p className="text-danger mt-3 mb-0">{errorLogin}</p>
+            )}
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={cerrarModal}>
