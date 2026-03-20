@@ -1,4 +1,5 @@
 import Comentario from "../Comentario/Comentario";
+import { Pagination } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { obtenerComentarios } from "./obtenerComentarios";
 import dayjs from "dayjs";
@@ -12,6 +13,9 @@ dayjs.locale("es");
 export default function ListadoComentarios(props) {
   const [comentarios, setComentarios] = useState([]);
   const [actualizarComentarios, setActualizarComentarios] = useState(false);
+
+  const [paginaActual, setPaginaActual] = useState(1);
+  const comentariosPorPagina = 7;
 
   const obtenerTiempoRelativo = (fechaRaw) => {
     if (!fechaRaw) return "";
@@ -41,27 +45,56 @@ export default function ListadoComentarios(props) {
     });
   }, [props.id, actualizarComentarios]);
 
+  const indiceUltimo = paginaActual * comentariosPorPagina;
+  const indicePrimero = indiceUltimo - comentariosPorPagina;
+  const comentariosPaginados = comentarios.slice(indicePrimero, indiceUltimo);
+  const totalPaginas = Math.ceil(comentarios.length / comentariosPorPagina);
+
   return (
     <div className="ficha-opiniones mt-5">
       <h3 className="text-white mb-4">Opiniones de usuarios</h3>
       <NuevoComentario
         idPelicula={props.id}
         comentarios={comentarios}
-        usuarioAutenticado={props.usuarioAutenticado}
         setActualizarComentarios={setActualizarComentarios}
         setActualizarComentariosPuntuacion={props.setActualizarPuntuacion}
       />
+
       <div className="opiniones-lista">
         {comentarios.length > 0 ? (
-          comentarios.map((comentario) => (
-            <Comentario key={comentario.id} comentario={comentario} />
-          ))
+          <>
+            {comentariosPaginados.map((comentario) => (
+              <Comentario key={comentario.id} comentario={comentario} />
+            ))}
+
+            {comentarios.length > comentariosPorPagina && (
+              <Pagination className="mt-4 justify-content-center custom-pagination">
+                <Pagination.First
+                  onClick={() => setPaginaActual(1)}
+                  disabled={paginaActual === 1}
+                />
+
+                {[...Array(totalPaginas)].map((_, index) => (
+                  <Pagination.Item
+                    key={index + 1}
+                    active={index + 1 === paginaActual}
+                    onClick={() => setPaginaActual(index + 1)}
+                  >
+                    {index + 1}
+                  </Pagination.Item>
+                ))}
+
+                <Pagination.Last
+                  onClick={() => setPaginaActual(totalPaginas)}
+                  disabled={paginaActual === totalPaginas}
+                />
+              </Pagination>
+            )}
+          </>
         ) : (
-          <div>
-            <p className="text-white">
-              <em>Aún no hay comentarios para esta película.</em>
-            </p>
-          </div>
+          <p className="text-white">
+            <em>Aún no hay comentarios para esta película.</em>
+          </p>
         )}
       </div>
     </div>
