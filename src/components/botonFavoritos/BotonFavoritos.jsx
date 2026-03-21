@@ -5,6 +5,8 @@ import AutContext from "../../store/AutContext";
 export default function BotonFavoritos({ favorito, alHacerClic }) {
   const authContext = useContext(AutContext);
 
+  authContext.onComprobarSesionExpirada();
+
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
       {!authContext.usuarioLogueado

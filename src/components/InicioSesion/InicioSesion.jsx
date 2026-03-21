@@ -15,6 +15,8 @@ function InicioSesion({ onInicioSesion, onCerrarSesion }) {
 
   const authContext = useContext(AutContext);
 
+  authContext.onComprobarSesionExpirada();
+
   const abrirModal = () => setMostrarModal(true);
   const cerrarModal = () => {
     setMostrarModal(false);
@@ -35,6 +37,7 @@ function InicioSesion({ onInicioSesion, onCerrarSesion }) {
       .then((res) => {
         const idToken = res.data.idToken;
         const localId = res.data.localId;
+        const expirationSesion = res.data.expiresIn;
 
         return axios
           .get(
@@ -43,18 +46,26 @@ function InicioSesion({ onInicioSesion, onCerrarSesion }) {
               ".json?auth=" +
               idToken,
           )
-          .then((perfilRes) => ({ perfilRes, localId, idToken }));
+          .then((perfilRes) => ({
+            perfilRes,
+            localId,
+            idToken,
+            expirationSesion,
+          }));
       })
-      .then(({ perfilRes, localId, idToken }) => {
+      .then(({ perfilRes, localId, idToken, expirationSesion }) => {
         if (!perfilRes.data) {
           throw new Error(
             "No existe perfil para este usuario en la base de datos.",
           );
         }
 
+        const fechaFin = new Date().getTime() + expirationSesion * 1000;
+
         const usuarioConSesion = {
           uid: localId,
           idToken,
+          fechaExpiracion: fechaFin,
           ...perfilRes.data,
         };
 

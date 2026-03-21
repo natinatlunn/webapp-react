@@ -43,6 +43,8 @@ export default function FichaPeliculaDetalle({
   const poster = pelicula.portada.replace(".jpg", "_poster.jpg");
   const authContext = useContext(AutContext);
 
+  authContext.onComprobarSesionExpirada();
+
   const handleToggleFavorito = () => {
     if (!authContext.usuarioLogueado) {
       window.alert("Debes iniciar sesion para guardar peliculas en favoritos.");

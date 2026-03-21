@@ -7,6 +7,8 @@ import AutContext from "../store/AutContext";
 function Favoritos({ favoritos = [], onToggleFavorito }) {
   const authContext = useContext(AutContext);
 
+  authContext.onComprobarSesionExpirada();
+
   if (!authContext.usuarioLogueado) {
     return (
       <section className="peliculas-layout text-center py-5">

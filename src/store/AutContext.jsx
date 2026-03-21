@@ -5,5 +5,6 @@ const AutContext = React.createContext({
   idToken: "",
   nombre: "",
   nombreUsuario: "",
+  onComprobarSesionExpirada: () => {},
 });
 export default AutContext;

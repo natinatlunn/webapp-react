@@ -62,35 +62,56 @@ function normalizarUsuario(usuario) {
   };
 }
 
+const obtenerUsuarioDeStorage = () => {
+  const sesionGuardada = localStorage.getItem("usuarioActual");
+  const fechaExpiracion = localStorage.getItem("fechaExpiracion");
+
+  if (!sesionGuardada || !fechaExpiracion) return null;
+
+  const fechaActual = new Date().getTime();
+
+  if (fechaActual > parseInt(fechaExpiracion)) {
+    localStorage.clear();
+    return null;
+  }
+
+  return sesionGuardada;
+};
+
 function App() {
   const [usuarioActual, setUsuarioActual] = useState(() => {
-    const sesionGuardada = localStorage.getItem("usuarioActual");
+    const sesionGuardada = obtenerUsuarioDeStorage();
 
-    if (!sesionGuardada) {
-      return null;
-    }
+    if (!sesionGuardada) return null;
 
     try {
       return normalizarUsuario(JSON.parse(sesionGuardada));
     } catch {
-      localStorage.removeItem("usuarioActual");
       return null;
     }
   });
 
   const manejarInicioSesion = (usuario) => {
     const usuarioNormalizado = normalizarUsuario(usuario);
+
     setUsuarioActual(usuarioNormalizado);
+    localStorage.setItem("fechaExpiracion", usuario.fechaExpiracion.toString());
     localStorage.setItem("usuarioActual", JSON.stringify(usuarioNormalizado));
   };
 
   const manejarCerrarSesion = () => {
     setUsuarioActual(null);
-    localStorage.removeItem("usuarioActual");
+    localStorage.clear();
   };
 
   const manejarToggleFavorito = async (idPelicula) => {
-    if (!usuarioActual?.uid || !Number.isInteger(idPelicula)) {
+    const fechaExpiracion = localStorage.getItem("fechaExpiracion");
+
+    if (
+      !fechaExpiracion ||
+      !usuarioActual?.uid ||
+      !Number.isInteger(idPelicula)
+    ) {
       return;
     }
 
@@ -125,15 +146,29 @@ function App() {
 
   const favoritosUsuario = normalizarFavoritos(usuarioActual?.favoritos);
 
+  const comprobarSesionExpirada = () => {
+    const fechaActual = Date.now();
+    const fechaExpiracion = localStorage.getItem("fechaExpiracion");
+
+    if (!fechaExpiracion || fechaActual > fechaExpiracion) {
+      setTimeout(() => {
+        manejarCerrarSesion();
+      }, 0);
+      return true;
+    }
+    return false;
+  };
+
+  const autParams = {
+    usuarioLogueado: !!usuarioActual,
+    idToken: usuarioActual?.idToken,
+    nombre: usuarioActual?.nombre,
+    nombreUsuario: usuarioActual?.nombre_usuario,
+    onComprobarSesionExpirada: comprobarSesionExpirada,
+  };
+
   return (
-    <AutContext.Provider
-      value={{
-        usuarioLogueado: usuarioActual ? true : false,
-        idToken: usuarioActual?.idToken,
-        nombre: usuarioActual?.nombre,
-        nombreUsuario: usuarioActual?.nombre_usuario,
-      }}
-    >
+    <AutContext.Provider value={autParams}>
       <Container fluid className="p-0 d-flex flex-column min-vh-100">
         <Row className="g-0">
           <Col xs={12} className="p-0">

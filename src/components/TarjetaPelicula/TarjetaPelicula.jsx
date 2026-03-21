@@ -14,6 +14,7 @@ export default function TarjetaPelicula({
   const [puntuacionMedia, setPuntuacionMedia] = useState(0);
   const authContext = useContext(AutContext);
 
+  authContext.onComprobarSesionExpirada();
   const handleToggleFavorito = (evento) => {
     evento.preventDefault();
     evento.stopPropagation();

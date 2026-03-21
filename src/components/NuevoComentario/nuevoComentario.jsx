@@ -8,6 +8,8 @@ export default function NuevoComentario(props) {
 
   const authContext = useContext(AutContext);
 
+  authContext.onComprobarSesionExpirada();
+
   const enviarComentario = (event) => {
     event.preventDefault();
     if (puntuacion === 0) return alert("Por favor, selecciona una puntuación");
