@@ -1,20 +1,48 @@
 .footer-app {
-  width: 100%;
-  padding: 1rem;
-  text-align: center;
   background-color: #212529;
+  border-top: 1px solid #222;
 }
 
-.footer-texto {
-  margin: 0;
-  color: #f8f9fa;
-  font-size: 0.9rem;
+/* Efecto para los enlaces de texto */
+.nav-link-hover {
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+  display: inline-block;
 }
 
-.footer-nav {
-  margin-top: 0.5rem;
+.nav-link-hover:hover {
+  opacity: 0.7;
+  transform: translateY(-1px);
 }
 
-.footer-nav .nav-item + .nav-item {
-  margin-left: 1.5rem;
+/* Estilo para los iconos de Redes Sociales */
+.social-icon-link {
+  color: #ffffff !important; /* Blanco puro */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.05
+  ); /* Círculo de fondo casi invisible */
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.social-icon-link:hover {
+  background-color: rgba(255, 255, 255, 0.15); /* Se ilumina el círculo */
+  transform: scale(1.1);
+  color: #ffffff !important;
+}
+
+/* Evitar subrayados azules en todos los links del footer */
+footer a {
+  text-decoration: none !important;
 }
