@@ -53,14 +53,26 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: 2;
-  border: none;
+  border: none !important;
   width: 40px;
   height: 40px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.86);
-  color: #1b1b1b;
+  padding: 0 !important;
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.86) !important;
+  color: #1b1b1b !important;
   font-size: 1.2rem;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carrusel-btn:hover {
+  background: rgba(255, 255, 255, 1) !important;
+}
+
+.carrusel-btn:active {
+  background: rgba(255, 255, 255, 0.9) !important;
 }
 
 .carrusel-btn.prev {
