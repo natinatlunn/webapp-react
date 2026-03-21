@@ -5,6 +5,8 @@ const AutContext = React.createContext({
   idToken: "",
   nombre: "",
   nombreUsuario: "",
+  favoritos: [],
+  onToggleFavorito: () => {},
   onComprobarSesionExpirada: () => {},
 });
 export default AutContext;

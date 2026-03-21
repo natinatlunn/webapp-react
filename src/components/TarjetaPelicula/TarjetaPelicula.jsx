@@ -6,15 +6,12 @@ import { useContext, useEffect, useState } from "react";
 import { obtenerPuntuacionMedia } from "../obtenerPuntuacionMedia";
 import AutContext from "../../store/AutContext";
 
-export default function TarjetaPelicula({
-  pelicula,
-  esFavorito = false,
-  onToggleFavorito,
-}) {
+export default function TarjetaPelicula({ pelicula }) {
   const [puntuacionMedia, setPuntuacionMedia] = useState(0);
   const authContext = useContext(AutContext);
 
   authContext.onComprobarSesionExpirada();
+
   const handleToggleFavorito = (evento) => {
     evento.preventDefault();
     evento.stopPropagation();
@@ -24,7 +21,7 @@ export default function TarjetaPelicula({
       return;
     }
 
-    onToggleFavorito?.(pelicula.id);
+    authContext.onToggleFavorito?.(pelicula.id);
   };
 
   useEffect(() => {
@@ -32,6 +29,7 @@ export default function TarjetaPelicula({
       setPuntuacionMedia(media);
     });
   }, [pelicula.id]);
+
   return (
     <Card
       as={Link}
@@ -65,7 +63,8 @@ export default function TarjetaPelicula({
           >
             <div onClick={(e) => e.preventDefault()}>
               <BotonFavoritos
-                favorito={esFavorito}
+                usuarioLogueado={authContext.usuarioLogueado}
+                esFavorito={authContext.favoritos.includes(pelicula.id)}
                 alHacerClic={handleToggleFavorito}
               />
             </div>

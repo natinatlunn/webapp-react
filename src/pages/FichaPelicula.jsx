@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import FichaPeliculaDetalle from "../components/FichaPelicula/FichaPelicula";
 import peliculas from "../data/peliculas.json";
 
-export default function FichaPelicula({ favoritos = [], onToggleFavorito }) {
+export default function FichaPelicula() {
   const { id = "" } = useParams();
   const pelicula = peliculas.find((item) => item.id === Number(id));
 
@@ -22,11 +22,5 @@ export default function FichaPelicula({ favoritos = [], onToggleFavorito }) {
     );
   }
 
-  return (
-    <FichaPeliculaDetalle
-      pelicula={pelicula}
-      esFavorito={favoritos.includes(pelicula.id)}
-      onToggleFavorito={onToggleFavorito}
-    />
-  );
+  return <FichaPeliculaDetalle pelicula={pelicula} />;
 }

@@ -4,7 +4,7 @@ import "../components/ListadoPeliculas/ListadoPeliculas.css";
 import { useContext } from "react";
 import AutContext from "../store/AutContext";
 
-function Favoritos({ favoritos = [], onToggleFavorito }) {
+function Favoritos() {
   const authContext = useContext(AutContext);
 
   authContext.onComprobarSesionExpirada();
@@ -18,7 +18,7 @@ function Favoritos({ favoritos = [], onToggleFavorito }) {
     );
   }
 
-  const idsFavoritos = new Set(favoritos);
+  const idsFavoritos = new Set(authContext.favoritos);
 
   const peliculasFavoritas = peliculas.filter((pelicula) =>
     idsFavoritos.has(pelicula.id),
@@ -32,13 +32,7 @@ function Favoritos({ favoritos = [], onToggleFavorito }) {
       ) : (
         <div className="peliculas-grid">
           {peliculasFavoritas.map((pelicula) => (
-            <TarjetaPelicula
-              key={pelicula.id}
-              pelicula={pelicula}
-              usuarioPuedeGuardarFavoritos
-              esFavorito
-              onToggleFavorito={onToggleFavorito}
-            />
+            <TarjetaPelicula key={pelicula.id} pelicula={pelicula} />
           ))}
         </div>
       )}

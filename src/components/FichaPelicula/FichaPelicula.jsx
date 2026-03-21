@@ -32,11 +32,7 @@ function formatearDuracion(duracion) {
   return `${duracion} min`;
 }
 
-export default function FichaPeliculaDetalle({
-  pelicula,
-  esFavorito = false,
-  onToggleFavorito,
-}) {
+export default function FichaPeliculaDetalle({ pelicula }) {
   const [puntuacionMedia, setPuntuacionMedia] = useState(null);
   const [actualizarPuntuacion, setActualizarPuntuacion] = useState(false);
   const anio = obtenerAnio(pelicula.fechaEstreno);
@@ -51,7 +47,7 @@ export default function FichaPeliculaDetalle({
       return;
     }
 
-    onToggleFavorito?.(pelicula.id);
+    authContext.onToggleFavorito?.(pelicula.id);
   };
 
   useEffect(() => {
@@ -75,7 +71,8 @@ export default function FichaPeliculaDetalle({
         <div className="ficha-grid">
           <div className="ficha-boton-favoritos">
             <BotonFavoritos
-              favorito={esFavorito}
+              usuarioLogueado={authContext.usuarioLogueado}
+              esFavorito={authContext.favoritos.includes(pelicula.id)}
               alHacerClic={handleToggleFavorito}
             />
           </div>

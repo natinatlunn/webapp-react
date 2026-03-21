@@ -164,6 +164,8 @@ function App() {
     idToken: usuarioActual?.idToken,
     nombre: usuarioActual?.nombre,
     nombreUsuario: usuarioActual?.nombre_usuario,
+    favoritos: favoritosUsuario,
+    onToggleFavorito: manejarToggleFavorito,
     onComprobarSesionExpirada: comprobarSesionExpirada,
   };
 
@@ -182,44 +184,15 @@ function App() {
         <Row className="flex-grow-1">
           <Col>
             <Routes>
-              <Route
-                index
-                element={
-                  <PaginaPrincipal
-                    favoritos={favoritosUsuario}
-                    onToggleFavorito={manejarToggleFavorito}
-                  />
-                }
-              />
+              <Route index element={<PaginaPrincipal />} />
               <Route
                 path="/categoria/:categoria"
-                element={
-                  <PeliculasCategoria
-                    favoritos={favoritosUsuario}
-                    onToggleFavorito={manejarToggleFavorito}
-                  />
-                }
+                element={<PeliculasCategoria />}
               />
               <Route path="/paginas/AvisoLegal" element={<AvisoLegal />} />
               <Route path="/paginas/InfoContacto" element={<InfoContacto />} />
-              <Route
-                path="/ficha/:id"
-                element={
-                  <FichaPelicula
-                    favoritos={favoritosUsuario}
-                    onToggleFavorito={manejarToggleFavorito}
-                  />
-                }
-              />
-              <Route
-                path="/favoritos"
-                element={
-                  <Favoritos
-                    favoritos={favoritosUsuario}
-                    onToggleFavorito={manejarToggleFavorito}
-                  />
-                }
-              />
+              <Route path="/ficha/:id" element={<FichaPelicula />} />
+              <Route path="/favoritos" element={<Favoritos />} />
             </Routes>
           </Col>
         </Row>
