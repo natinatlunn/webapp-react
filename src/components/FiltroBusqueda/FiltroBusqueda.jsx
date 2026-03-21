@@ -1,9 +1,12 @@
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import peliculas from '../../data/peliculas.json';
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import { useState } from "react";
+import peliculas from "../../data/peliculas.json";
 import "./FiltroBusqueda.css";
 
 function FiltroBusqueda(props) {
+  const [estaEnFoco, setEstaEnFoco] = useState(false);
+
   const textoNormalizado = props.valor.trim().toLowerCase();
   const categorias = [...new Set(peliculas.flatMap((p) => p.genero))].sort();
 
@@ -11,7 +14,14 @@ function FiltroBusqueda(props) {
     categoria.toLowerCase().includes(textoNormalizado),
   );
 
-  const mostrarSugerencias = textoNormalizado.length > 0 && sugerencias.length > 0;
+  const mostrarSugerencias =
+    estaEnFoco && textoNormalizado.length > 0 && sugerencias.length > 0;
+
+  const manejarBlur = () => {
+    setTimeout(() => {
+      setEstaEnFoco(false);
+    }, 200);
+  };
 
   return (
     <div className="filtro-busqueda">
@@ -21,6 +31,8 @@ function FiltroBusqueda(props) {
           placeholder="Buscar por categoría..."
           value={props.valor}
           onChange={props.onCambio}
+          onFocus={() => setEstaEnFoco(true)}
+          onBlur={manejarBlur}
           autoComplete="off"
         />
         <Button variant="primary" type="submit" aria-label="Buscar">
