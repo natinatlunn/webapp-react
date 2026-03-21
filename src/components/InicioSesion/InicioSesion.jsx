@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import "./InicioSesion.css";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -84,21 +85,57 @@ function InicioSesion({ onInicioSesion, onCerrarSesion }) {
     return (
       <Dropdown align="end">
         <Dropdown.Toggle
-          variant="outline-light"
-          className="boton-usuario"
+          variant="none"
+          className="d-flex align-items-center gap-2 p-1 pe-2 border-0"
           id="dropdown-usuario"
-          aria-label="Abrir menu de usuario"
+          style={{
+            backgroundColor: "rgba(255,255,255,0.05)",
+            borderRadius: "50px",
+          }}
         >
-          <i className="bi bi-person-fill"></i>
+          <div
+            style={{
+              width: "32px",
+              height: "32px",
+              backgroundColor: "#0062ff",
+              color: "white",
+              borderRadius: "50%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "0.8rem",
+              fontWeight: "bold",
+            }}
+          >
+            {authContext.nombre.charAt(0).toUpperCase()}
+          </div>
+
+          <span className="text-white small fw-medium d-none d-md-block">
+            {authContext.nombre}
+          </span>
+
+          <i className="bi bi-chevron-down text-white-50 small"></i>
         </Dropdown.Toggle>
 
-        <Dropdown.Menu>
-          <Dropdown.Header>Bienvenido, {authContext.nombre}</Dropdown.Header>
-          <Dropdown.Item as={Link} to="/favoritos">
-            Peliculas favoritas
+        <Dropdown.Menu
+          className="border-0 shadow-lg mt-2 py-2"
+          style={{ borderRadius: "12px", minWidth: "200px" }}
+        >
+          <div className="px-3 py-2 mb-1">
+            <p className="mb-0 small text-muted">Cuenta activa</p>
+            <p className="mb-0 fw-bold small text-dark">
+              {authContext.nombreUsuario}
+            </p>
+          </div>
+          <Dropdown.Divider />
+          <Dropdown.Item as={Link} to="/favoritos" className="py-2">
+            <i className="bi bi-bookmark-heart me-2 text-primary" /> Mis
+            Películas
           </Dropdown.Item>
           <Dropdown.Divider />
-          <Dropdown.Item onClick={onCerrarSesion}>Cerrar sesion</Dropdown.Item>
+          <Dropdown.Item onClick={onCerrarSesion} className="text-danger py-2">
+            <i className="bi bi-box-arrow-right me-2"></i> Cerrar sesión
+          </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     );
@@ -108,50 +145,98 @@ function InicioSesion({ onInicioSesion, onCerrarSesion }) {
     <>
       <Button
         variant="outline-light"
-        className="boton-usuario"
+        className="boton-usuario-invitado d-flex align-items-center gap-2 px-3 py-2"
         onClick={abrirModal}
-        aria-label="Abrir inicio de sesion"
+        style={{
+          borderRadius: "10px",
+          border: "1px solid rgba(255,255,255,0.2)",
+          transition: "all 0.3s ease",
+        }}
       >
-        <i className="bi bi-person-fill"></i>
+        <i className="bi bi-person-circle fs-5"></i>
+        <span className="fw-medium small">Entrar</span>
       </Button>
+      <Modal
+        show={mostrarModal}
+        onHide={cerrarModal}
+        centered
+        contentClassName="border-0 shadow-2xl"
+      >
+        <div className="p-4">
+          <Modal.Header
+            closeButton
+            className="d-flex align-items-start border-0 pb-0"
+          >
+            <div>
+              <Modal.Title className="fw-bold fs-3 text-dark mb-1">
+                Iniciar sesión
+              </Modal.Title>
+              <p className="text-muted small">
+                Introduce tus datos para continuar
+              </p>
+            </div>
+          </Modal.Header>
 
-      <Modal show={mostrarModal} onHide={cerrarModal} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Iniciar sesion</Modal.Title>
-        </Modal.Header>
-        <Form onSubmit={submitLogin}>
-          <Modal.Body>
-            <Form.Group className="mb-3" controlId="correoInicioSesion">
-              <Form.Label>Correo electronico</Form.Label>
-              <Form.Control
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                type="email"
-                placeholder="nombre@ejemplo.com"
-              />
-            </Form.Group>
-            <Form.Group controlId="contrasenaInicioSesion">
-              <Form.Label>Contrasena</Form.Label>
-              <Form.Control
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-                type="password"
-                placeholder="********"
-              />
-            </Form.Group>
-            {errorLogin && (
-              <p className="text-danger mt-3 mb-0">{errorLogin}</p>
-            )}
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={cerrarModal}>
-              Cancelar
-            </Button>
-            <Button variant="primary" type="submit">
-              Aceptar
-            </Button>
-          </Modal.Footer>
-        </Form>
+          <Form onSubmit={submitLogin}>
+            <Modal.Body className="py-2">
+              <Form.Group className="mb-4">
+                <Form.Control
+                  type="email"
+                  placeholder="Correo electrónico"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="border-0 border-bottom rounded-0 px-0 py-2"
+                  style={{
+                    boxShadow: "none",
+                    borderBottom: "1px solid #eaeaea",
+                    fontSize: "0.95rem",
+                  }}
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-2">
+                <Form.Control
+                  type="password"
+                  placeholder="Contraseña"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="border-0 border-bottom rounded-0 px-0 py-2"
+                  style={{
+                    boxShadow: "none",
+                    borderBottom: "1px solid #eaeaea",
+                    fontSize: "0.95rem",
+                  }}
+                />
+              </Form.Group>
+
+              {errorLogin && (
+                <div className="mt-3 py-2 px-3 rounded-3 bg-danger bg-opacity-10 text-danger small fw-medium">
+                  {errorLogin}
+                </div>
+              )}
+            </Modal.Body>
+
+            <Modal.Footer className="border-0 pt-4 pb-2">
+              <Button
+                variant="dark"
+                type="submit"
+                className="w-100 py-3 fw-semibold rounded-pill"
+                style={{ letterSpacing: "0.5px" }}
+              >
+                Entrar ahora
+              </Button>
+              {/* <div className="w-100 text-center mt-3">
+                <Link
+                  to="/registro"
+                  className="text-muted small text-decoration-none hover-dark"
+                >
+                  ¿No tienes cuenta?{" "}
+                  <span className="text-primary fw-bold">Regístrate</span>
+                </Link>
+              </div> */}
+            </Modal.Footer>
+          </Form>
+        </div>
       </Modal>
     </>
   );
