@@ -1,6 +1,5 @@
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
 import { useState } from "react";
+import { Form, InputGroup, ListGroup } from "react-bootstrap";
 import peliculas from "../../data/peliculas.json";
 import "./FiltroBusqueda.css";
 
@@ -24,41 +23,43 @@ function FiltroBusqueda(props) {
   };
 
   return (
-    <div className="filtro-busqueda">
-      <Form className="zona-buscador" onSubmit={props.onEnviar}>
-        <Form.Control
-          type="text"
-          placeholder="Buscar por categoría..."
-          value={props.valor}
-          onChange={props.onCambio}
-          onFocus={() => setEstaEnFoco(true)}
-          onBlur={manejarBlur}
-          autoComplete="off"
-        />
-        <Button variant="primary" type="submit" aria-label="Buscar">
-          <i className="bi bi-search"></i>
-        </Button>
-      </Form>
+    <div
+      className="filtro-busqueda-wrapper mx-auto"
+      style={{ maxWidth: "500px", width: "100%" }}
+    >
+      <Form onSubmit={props.onEnviar} className="position-relative">
+        <InputGroup className="search-group-premium shadow-none">
+          <InputGroup.Text className="bg-transparent border-0 pe-0">
+            <i className="bi bi-search text-muted small"></i>
+          </InputGroup.Text>
 
-      {mostrarSugerencias && (
-        <ul className="lista-sugerencias">
-          {sugerencias.map((categoria) => (
-            <li
-              key={categoria}
-              onClick={() => props.onSugerenciaClick(categoria)}
-              onKeyDown={(evento) => {
-                if (evento.key === "Enter") {
-                  props.onSugerenciaClick(categoria);
-                }
-              }}
-              role="button"
-              tabIndex={0}
-            >
-              {categoria}
-            </li>
-          ))}
-        </ul>
-      )}
+          <Form.Control
+            type="text"
+            placeholder="Buscar por género..."
+            value={props.valor}
+            onChange={props.onCambio}
+            onFocus={() => setEstaEnFoco(true)}
+            onBlur={manejarBlur}
+            autoComplete="off"
+            className="search-input-minimal border-0 bg-transparent shadow-none"
+          />
+        </InputGroup>
+
+        {mostrarSugerencias && (
+          <ListGroup className="suggestions-box border-0 shadow-sm mt-1">
+            {sugerencias.map((categoria) => (
+              <ListGroup.Item
+                key={categoria}
+                action
+                onClick={() => props.onSugerenciaClick(categoria)}
+                className="suggestion-item-minimal border-0 py-2"
+              >
+                <span className="suggestion-text-style">{categoria}</span>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        )}
+      </Form>
     </div>
   );
 }
