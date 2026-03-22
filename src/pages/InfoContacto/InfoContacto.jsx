@@ -5,10 +5,14 @@ function InfoContacto() {
   return (
     <Container className="py-3 my-3">
       <div className="text-center mb-5">
-        <h1 className="fw-light text-dark display-5 mt-3">
+        <h1 className="fw-light text-dark display-5 mt-2 mb-3">
           Información de contacto
         </h1>
-        <p className="text-muted fs-5">
+        <div
+          className="mx-auto bg-flixi-line"
+          style={{ width: "40px", height: "2px" }}
+        ></div>
+        <p className="text-muted fs-5 mt-3">
           Si tienes alguna pregunta o necesitas asistencia, no dudes en
           contactarnos
         </p>

@@ -9,12 +9,14 @@ function AvisoLegal() {
       <Card className="border-0 custom-card-legal mx-auto">
         <Card.Body className="p-2 text-center">
           <header className="pb-4">
-            <h1 className="fw-light text-dark display-5 mt-3">Aviso Legal</h1>
+            <h1 className="fw-light text-dark display-5 mt-2 mb-3">
+              Aviso Legal
+            </h1>
             <div
               className="mx-auto bg-flixi-line"
               style={{ width: "40px", height: "2px" }}
             ></div>
-            <p className="text-muted small fw-light italic">
+            <p className="text-muted small fw-light italic mt-3">
               Última revisión: {fechaActualizacion}
             </p>
           </header>

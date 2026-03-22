@@ -1,0 +1,39 @@
+.ls-2 {
+  letter-spacing: 2.5px;
+}
+
+.bg-flixi-line {
+  background-color: #496793;
+  opacity: 0.6;
+}
+
+.fw-light {
+  font-weight: 300 !important;
+}
+
+.italic {
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.peliculas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  padding-top: 1rem;
+}
+
+.peliculas-layout {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
