@@ -6,7 +6,7 @@ import { Container, Button } from "react-bootstrap";
 
 export default function ListadoPeliculas({ peliculasFiltradas }) {
   const peliculasAMostrar = peliculasFiltradas ?? peliculas;
-  const [mostrar, setMostrar] = useState(true);
+  const [mostrar, setMostrar] = useState(false);
 
   function handleMostrarPeliculas() {
     setMostrar(!mostrar);
