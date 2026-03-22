@@ -181,7 +181,7 @@ function App() {
           </Col>
         </Row>
 
-        <Row className="flex-grow-1">
+        <Row className="g-0 flex-grow-1">
           <Col>
             <Routes>
               <Route index element={<PaginaPrincipal />} />
@@ -197,7 +197,7 @@ function App() {
           </Col>
         </Row>
 
-        <Row className="mt-auto">
+        <Row className="g-0">
           <Col className="p-0">
             <Footer />
           </Col>
