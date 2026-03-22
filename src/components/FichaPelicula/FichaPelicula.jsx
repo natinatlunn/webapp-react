@@ -167,7 +167,7 @@ export default function FichaPeliculaDetalle({ pelicula }) {
                   variant="outline-light"
                   size="lg"
                 >
-                  <i class="bi bi-play me-2"></i>
+                  <i className="bi bi-play me-2"></i>
                   Ver tráiler
                 </Button>
               </Stack>
