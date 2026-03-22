@@ -11,12 +11,15 @@ import {
   Row,
   Badge,
 } from "react-bootstrap";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useMemo } from "react";
 import { obtenerPuntuacionMedia } from "../obtenerPuntuacionMedia";
 import AutContext from "../../store/AutContext";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import ReproductorTrailer from "../ReproductorTrailer/ReproductorTrailer";
+import peliculas from "../../data/peliculas.json";
+import Curiosidades from "./curiosidades";
+import Sugerencias from "./sugerencias";
 
 dayjs.extend(duration);
 
@@ -48,11 +51,6 @@ export default function FichaPeliculaDetalle({ pelicula }) {
   authContext.onComprobarSesionExpirada();
 
   const handleToggleFavorito = () => {
-    if (!authContext.usuarioLogueado) {
-      window.alert("Debes iniciar sesion para guardar peliculas en favoritos.");
-      return;
-    }
-
     authContext.onToggleFavorito?.(pelicula.id);
   };
 
@@ -68,6 +66,18 @@ export default function FichaPeliculaDetalle({ pelicula }) {
     if (score >= 4) return "#d2d531";
     return "#db2360";
   };
+
+  const obtenerSugerenciasAleatorias = (listaPeliculas, idPeliculaActual) => {
+    const filtradas = listaPeliculas.filter((p) => p.id !== idPeliculaActual);
+
+    const barajadas = [...filtradas].sort(() => 0.5 - Math.random());
+
+    return barajadas.slice(0, 4);
+  };
+  const sugerencias = useMemo(
+    () => obtenerSugerenciasAleatorias(peliculas, pelicula.id),
+    [pelicula.id],
+  );
 
   return (
     <section className="ficha-wrap">
@@ -179,15 +189,17 @@ export default function FichaPeliculaDetalle({ pelicula }) {
           </div>
         </div>
 
-        {/* Sección de Comentarios */}
-        <Row className="mt-4">
-          <Col md={7}>
+        <Row className="mt-4 gap-3">
+          <Col md={6}>
             <ListadoComentarios
               id={pelicula.id}
               setActualizarPuntuacion={setActualizarPuntuacion}
             />
           </Col>
-          <Col></Col>
+          <Col className="mt-5">
+            <Curiosidades curiosidad={pelicula.curiosidad} />
+            <Sugerencias sugerencias={sugerencias} />
+          </Col>
         </Row>
       </Container>
     </section>
