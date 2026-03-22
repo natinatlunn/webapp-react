@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/es";
 import NuevoComentario from "../NuevoComentario/nuevoComentario";
+import "./ListadoComentarios.css";
 
 dayjs.extend(relativeTime);
 dayjs.locale("es");
@@ -15,7 +16,7 @@ export default function ListadoComentarios(props) {
   const [actualizarComentarios, setActualizarComentarios] = useState(false);
 
   const [paginaActual, setPaginaActual] = useState(1);
-  const comentariosPorPagina = 7;
+  const comentariosPorPagina = 6;
 
   const obtenerTiempoRelativo = (fechaRaw) => {
     if (!fechaRaw) return "";
