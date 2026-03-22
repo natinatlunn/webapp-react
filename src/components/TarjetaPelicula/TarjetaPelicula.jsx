@@ -16,11 +16,6 @@ export default function TarjetaPelicula({ pelicula }) {
     evento.preventDefault();
     evento.stopPropagation();
 
-    if (!authContext.usuarioLogueado) {
-      window.alert("Debes iniciar sesion para guardar peliculas en favoritos.");
-      return;
-    }
-
     authContext.onToggleFavorito?.(pelicula.id);
   };
 

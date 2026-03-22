@@ -44,8 +44,12 @@ export default function NuevoComentario(props) {
           <i
             key={estrella}
             className={`bi ${estrella <= puntuacion ? "bi-star-fill text-warning" : "bi-star text-secondary"} fs-3 me-1`}
-            style={{ cursor: "pointer" }}
-            onClick={() => setPuntuacion(estrella)}
+            style={{
+              cursor: authContext.usuarioLogueado ? "pointer" : "not-allowed",
+            }}
+            onClick={() => {
+              authContext.usuarioLogueado ? setPuntuacion(estrella) : undefined;
+            }}
           />
         ))}
       </div>
@@ -58,6 +62,10 @@ export default function NuevoComentario(props) {
           value={comentario}
           onChange={(e) => setComentario(e.target.value)}
           required
+          disabled={!authContext.usuarioLogueado}
+          style={{
+            cursor: authContext.usuarioLogueado ? "pointer" : "not-allowed",
+          }}
         />
       </div>
       <div className="d-flex justify-content-end">
@@ -65,6 +73,9 @@ export default function NuevoComentario(props) {
           type="submit"
           className="btn btn-warning fw-bold"
           disabled={!authContext.usuarioLogueado}
+          style={{
+            cursor: authContext.usuarioLogueado ? "pointer" : "not-allowed",
+          }}
         >
           Comentar
         </button>
