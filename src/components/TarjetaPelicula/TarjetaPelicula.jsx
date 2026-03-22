@@ -34,13 +34,19 @@ export default function TarjetaPelicula({ pelicula }) {
     <Card
       as={Link}
       to={`/ficha/${pelicula.id}`}
-      className="card-pelicula text-decoration-none"
+      className="card-pelicula text-decoration-none position-relative"
     >
       <Card.Img
         variant="top"
         src={`/images/portadas/${pelicula.portada}`}
         alt={`Portada de ${pelicula.titulo}`}
       />
+      <Badge
+        bg="dark"
+        className="badge-puntuacion border  border-dark position-absolute"
+      >
+        {Number(puntuacionMedia).toFixed(1)}
+      </Badge>
       <Card.Body
         className="text-bg-dark rounded-bottom"
         style={{
@@ -56,22 +62,13 @@ export default function TarjetaPelicula({ pelicula }) {
             {pelicula.titulo}
           </Card.Text>
 
-          <Stack
-            direction="horizontal"
-            gap={2}
-            className="align-items-center flex-shrink-0"
-          >
-            <div onClick={(e) => e.preventDefault()}>
-              <BotonFavoritos
-                usuarioLogueado={authContext.usuarioLogueado}
-                esFavorito={authContext.favoritos.includes(pelicula.id)}
-                alHacerClic={handleToggleFavorito}
-              />
-            </div>
-            <Badge bg="dark" className="border">
-              {Number(puntuacionMedia).toFixed(1)}
-            </Badge>
-          </Stack>
+          <div onClick={(e) => e.preventDefault()}>
+            <BotonFavoritos
+              usuarioLogueado={authContext.usuarioLogueado}
+              esFavorito={authContext.favoritos.includes(pelicula.id)}
+              alHacerClic={handleToggleFavorito}
+            />
+          </div>
         </Stack>
 
         <Stack direction="horizontal" gap={2} className="flex-wrap">
