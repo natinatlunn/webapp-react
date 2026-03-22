@@ -1,0 +1,17 @@
+.info-contacto {
+  background-color: #f8f9fa;
+}
+
+.card {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+}
+
+.bi-envelope-fill,
+.bi-telephone-fill,
+.bi-geo-alt-fill {
+  color: #496793;
+}
+
+h1 {
+  letter-spacing: -1px;
+}

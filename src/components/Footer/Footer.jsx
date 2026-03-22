@@ -6,7 +6,7 @@ function Footer() {
   const anioActual = new Date().getFullYear();
 
   return (
-    <footer className="footer-app py-2 mt-5">
+    <footer className="footer-app py-2">
       <Container>
         <Row className="gy-3 align-items-center">
           <Col xs={12} md={4} className="text-center text-md-start">
