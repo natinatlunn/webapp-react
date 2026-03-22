@@ -1,0 +1,47 @@
+.modal-trailer-dialog {
+  max-width: 900px;
+  margin: 1.75rem auto;
+}
+
+.modal-trailer-content {
+  background-color: #000000 !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+}
+
+.modal-trailer-header {
+  padding: 1rem 1.5rem 0.5rem !important;
+}
+
+.modal-trailer-header .btn-close {
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.modal-trailer-header .btn-close:hover {
+  opacity: 1;
+}
+
+.video-wrapper {
+  border-radius: 0 0 12px 12px;
+  overflow: hidden;
+}
+
+.iframe-trailer {
+  border: 0;
+}
+
+.btn-trailer-principal {
+  border-radius: 8px;
+  padding: 10px 24px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.btn-trailer-principal:hover {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  transform: translateY(-2px);
+}

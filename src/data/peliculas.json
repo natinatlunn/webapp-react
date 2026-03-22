@@ -6,6 +6,7 @@
     "genero": ["Acción", "Ciencia Ficción", "Aventura"],
     "duracion": 181,
     "portada": "avengers_end_game.jpg",
+    "trailerId": "svLSGZkTzC0",
     "sinopsis": "Tras los eventos devastadores de Infinity War, los Vengadores restantes intentan revertir las acciones de Thanos y restaurar el equilibrio en el universo cueste lo que cueste."
   },
   {
@@ -15,6 +16,7 @@
     "genero": ["Animación", "Familia"],
     "duracion": 96,
     "portada": "inside_out_2.jpg",
+    "trailerId": "ahogVfXzqs4",
     "sinopsis": "Riley entra en la adolescencia y su cuartel general sufre una repentina reforma para hacer espacio a nuevas emociones."
   },
   {
@@ -24,6 +26,7 @@
     "genero": ["Animación", "Aventura"],
     "duracion": 118,
     "portada": "super_mario_galaxy.jpg",
+    "trailerId": "73ChoYKVMcw",
     "sinopsis": "Mario y sus amigos viajan a través de diferentes galaxias para detener una amenaza cósmica de proporciones épicas."
   },
   {
@@ -33,6 +36,7 @@
     "genero": ["Animación", "Comedia"],
     "duracion": 110,
     "portada": "zootropolis_2.jpg",
+    "trailerId": "io6VfjLpgaU",
     "sinopsis": "Judy Hopps y Nick Wilde regresan para resolver un caso que los llevará a los rincones más profundos de la ciudad animal."
   },
   {
@@ -42,6 +46,7 @@
     "genero": ["Acción", "Comedia"],
     "duracion": 127,
     "portada": "deadpool_lobezno.jpg",
+    "trailerId": "B0LjOb8dXpw",
     "sinopsis": "Una misión frenética que une al mercenario bocazas con un Logan muy reacio para salvar el universo."
   },
   {
@@ -51,6 +56,7 @@
     "genero": ["Terror", "Misterio"],
     "duracion": 112,
     "portada": "scream_7.jpg",
+    "trailerId": "bK-Sam8baFU",
     "sinopsis": "Sidney Prescott regresa para enfrentarse a una nueva y más letal versión de Ghostface que acecha a su familia."
   },
   {
@@ -60,6 +66,7 @@
     "genero": ["Ciencia Ficción", "Aventura"],
     "duracion": 190,
     "portada": "avatar_fuego_ceniza.jpg",
+    "trailerId": "lhLsr9S3bgQ",
     "sinopsis": "Jake Sully y Neytiri conocen a una agresiva tribu de Na'vi vinculada al fuego en las regiones volcánicas de Pandora."
   },
   {
@@ -69,6 +76,7 @@
     "genero": ["Acción", "Aventura"],
     "duracion": 136,
     "portada": "spiderman_nuevo_dia.jpg",
+    "trailerId": "owfWVJoxXR4",
     "sinopsis": "Un Peter Parker más maduro intenta equilibrar su vida universitaria con las nuevas amenazas que surgen en las calles de Nueva York."
   },
   {
@@ -78,6 +86,7 @@
     "genero": ["Ciencia Ficción", "Drama"],
     "duracion": 166,
     "portada": "dune_2.jpg",
+    "trailerId": "Qv7I3wDfFzI",
     "sinopsis": "Paul Atreides se une a Chani y los Fremen mientras busca venganza contra quienes destruyeron a su familia."
   },
   {
@@ -87,6 +96,7 @@
     "genero": ["Biografía", "Música"],
     "duracion": 145,
     "portada": "michael_jackson.jpg",
+    "trailerId": "o1HQSh6zZ8s",
     "sinopsis": "Un retrato profundo y complejo de la vida de Michael Jackson, desde sus inicios hasta convertirse en el Rey del Pop."
   },
   {
@@ -96,6 +106,7 @@
     "genero": ["Animación", "Familia"],
     "duracion": 103,
     "portada": "toy_story_5.jpg",
+    "trailerId": "w56cHtfyGT8",
     "sinopsis": "Los juguetes se enfrentan a un nuevo desafío cuando los niños prefieren las pantallas sobre los juegos físicos."
   },
   {
@@ -105,6 +116,7 @@
     "genero": ["Acción", "Ciencia Ficción"],
     "duracion": 138,
     "portada": "superman.jpg",
+    "trailerId": "_EjMNSH9-p4",
     "sinopsis": "La historia de los orígenes de Superman mientras intenta reconciliar su herencia kryptoniana con su educación humana."
   },
   {
@@ -114,6 +126,7 @@
     "genero": ["Ciencia Ficción", "Suspense"],
     "duracion": 162,
     "portada": "la_odisea.jpg",
+    "trailerId": "NUIIc9gZOcQ",
     "sinopsis": "Un viaje épico a través del tiempo y el espacio dirigido por Christopher Nolan que desafía la percepción humana."
   },
   {
@@ -123,6 +136,7 @@
     "genero": ["Animación", "Aventura"],
     "duracion": 102,
     "portada": "moana_2.jpg",
+    "trailerId": "O5lPAcMEKvE",
     "sinopsis": "Vaiana recibe una llamada inesperada de sus ancestros y debe viajar a los mares lejanos de Oceanía."
   },
   {
@@ -132,6 +146,7 @@
     "genero": ["Acción", "Aventura"],
     "duracion": 134,
     "portada": "jurassic_world_renacer.jpg",
+    "trailerId": "1R3LTANp7hw",
     "sinopsis": "Un equipo de expertos intenta extraer ADN de las tres criaturas más masivas en una isla aislada y peligrosa."
   },
   {
@@ -142,6 +157,7 @@
     "rating": 8.9,
     "duracion": 128,
     "portada": "proyecto_salvacion.jpg",
+    "trailerId": "in-lUuKi0eE",
     "sinopsis": "Un astronauta despierta solo en una nave espacial sin recordar quién es ni cómo salvar a la Tierra de la extinción."
   },
   {
@@ -151,6 +167,7 @@
     "genero": ["Musical", "Fantasía"],
     "duracion": 161,
     "portada": "wicked.jpg",
+    "trailerId": "JDSRDbFqc_E",
     "sinopsis": "La historia no contada de las brujas de Oz y cómo una joven de piel verde se convirtió en la Malvada Bruja del Oeste."
   },
   {
@@ -160,6 +177,7 @@
     "genero": ["Ciencia Ficción", "Acción"],
     "duracion": 129,
     "portada": "mandalorian_grogu.jpg",
+    "trailerId": "VDEGdPTUP70",
     "sinopsis": "El cazarrecompensas Din Djarin y su aprendiz Grogu se embarcan en una misión vital para la Nueva República."
   },
   {
@@ -169,6 +187,7 @@
     "genero": ["Comedia", "Fantasía"],
     "duracion": 105,
     "portada": "bitelchus.jpg",
+    "trailerId": "bffGA7Vh0uE",
     "sinopsis": "Tras una tragedia familiar, tres generaciones de la familia Deetz regresan a Winter River y abren el portal al Más Allá."
   },
   {
@@ -178,6 +197,7 @@
     "genero": ["Drama", "Romance"],
     "duracion": 131,
     "portada": "romper_circulo.jpg",
+    "trailerId": "aT_IzP2eJaU",
     "sinopsis": "Lily Bloom supera una infancia traumática para embarcarse en una nueva vida y abrir su propio negocio. Un encuentro casual con un neurocirujano traba una conexión intensa, pero pronto aparecen sombras del pasado."
   }
 ]

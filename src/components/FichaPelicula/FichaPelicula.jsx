@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import "./FichaPelicula.css";
 import ListadoComentarios from "../ListadoComentarios/ListadoComentarios";
 import BotonFavoritos from "../botonFavoritos/BotonFavoritos";
@@ -17,6 +16,7 @@ import { obtenerPuntuacionMedia } from "../obtenerPuntuacionMedia";
 import AutContext from "../../store/AutContext";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
+import ReproductorTrailer from "../ReproductorTrailer/ReproductorTrailer";
 
 dayjs.extend(duration);
 
@@ -42,6 +42,7 @@ export default function FichaPeliculaDetalle({ pelicula }) {
   const [actualizarPuntuacion, setActualizarPuntuacion] = useState(false);
   const anio = obtenerAnio(pelicula.fechaEstreno);
   const poster = pelicula.portada.replace(".jpg", "_poster.jpg");
+  const [mostrarModal, setMostrarModal] = useState(false);
   const authContext = useContext(AutContext);
 
   authContext.onComprobarSesionExpirada();
@@ -161,17 +162,20 @@ export default function FichaPeliculaDetalle({ pelicula }) {
             <div className="ficha-acciones">
               <Stack direction="horizontal" gap={2} className="flex-wrap">
                 <Button
-                  href={`https://www.google.com/search?q=${encodeURIComponent(pelicula.titulo)}+tráiler`}
-                  target="_blank"
-                  rel="noreferrer"
                   variant="outline-light"
                   size="lg"
+                  onClick={() => setMostrarModal(true)}
                 >
                   <i className="bi bi-play me-2"></i>
                   Ver tráiler
                 </Button>
               </Stack>
             </div>
+            <ReproductorTrailer
+              pelicula={pelicula}
+              mostrarModal={mostrarModal}
+              setMostrarModal={setMostrarModal}
+            />
           </div>
         </div>
 
