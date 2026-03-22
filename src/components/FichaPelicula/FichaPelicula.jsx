@@ -2,36 +2,41 @@ import { Link } from "react-router-dom";
 import "./FichaPelicula.css";
 import ListadoComentarios from "../ListadoComentarios/ListadoComentarios";
 import BotonFavoritos from "../botonFavoritos/BotonFavoritos";
-import { Col, Row } from "react-bootstrap";
+import {
+  Spinner,
+  Container,
+  Button,
+  Stack,
+  Image,
+  Col,
+  Row,
+  Badge,
+} from "react-bootstrap";
 import { useState, useEffect, useContext } from "react";
 import { obtenerPuntuacionMedia } from "../obtenerPuntuacionMedia";
 import AutContext from "../../store/AutContext";
+import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
+
+dayjs.extend(duration);
 
 function obtenerAnio(fechaEstreno) {
   return String(fechaEstreno).slice(0, 4);
 }
 
-function formatearFecha(fechaEstreno) {
-  const valor = String(fechaEstreno);
-  if (valor.length !== 8) return "Fecha sin confirmar";
+function formatearDuracion(minutosTotales) {
+  if (!Number.isFinite(minutosTotales) || minutosTotales <= 0) {
+    return "Duración sin confirmar";
+  }
 
-  const anio = Number(valor.slice(0, 4));
-  const mes = Number(valor.slice(4, 6)) - 1;
-  const dia = Number(valor.slice(6, 8));
-  const fecha = new Date(anio, mes, dia);
+  const duracion = dayjs.duration(minutosTotales, "minutes");
+  const horas = duracion.hours();
+  const minutos = duracion.minutes();
 
-  return new Intl.DateTimeFormat("es-ES", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-  }).format(fecha);
+  return horas > 0
+    ? `${horas}h ${minutos > 0 ? minutos + "min" : ""}`
+    : `${minutos}min`;
 }
-
-function formatearDuracion(duracion) {
-  if (!Number.isFinite(duracion)) return "Duración sin confirmar";
-  return `${duracion} min`;
-}
-
 export default function FichaPeliculaDetalle({ pelicula }) {
   const [puntuacionMedia, setPuntuacionMedia] = useState(null);
   const [actualizarPuntuacion, setActualizarPuntuacion] = useState(false);
@@ -57,17 +62,23 @@ export default function FichaPeliculaDetalle({ pelicula }) {
     });
   }, [pelicula.id, actualizarPuntuacion]);
 
+  const obtenerColorProgreso = (score) => {
+    if (score >= 7) return "#21d07a";
+    if (score >= 4) return "#d2d531";
+    return "#db2360";
+  };
+
   return (
     <section className="ficha-wrap">
       <div className="ficha-bg" aria-hidden="true">
-        <img
+        <Image
           src={`/images/portadas/${pelicula.portada}`}
           alt=""
           className="ficha-bg-imagen"
         />
       </div>
 
-      <article className="ficha-card container">
+      <Container as="article" className="ficha-card">
         <div className="ficha-grid">
           <div className="ficha-boton-favoritos">
             <BotonFavoritos
@@ -76,8 +87,9 @@ export default function FichaPeliculaDetalle({ pelicula }) {
               alHacerClic={handleToggleFavorito}
             />
           </div>
+
           <aside className="ficha-poster-col">
-            <img
+            <Image
               src={`/images/posters/${poster}`}
               alt={`Póster de ${pelicula.titulo}`}
               className="ficha-poster"
@@ -86,49 +98,85 @@ export default function FichaPeliculaDetalle({ pelicula }) {
 
           <div className="ficha-info-col">
             <p className="ficha-eyebrow">Ficha de película</p>
-            <h1 className="ficha-titulo">{pelicula.titulo}</h1>
+            <Stack
+              direction="horizontal"
+              gap={5}
+              className="align-items-center mb-4"
+            >
+              <div className="d-flex flex-column">
+                <h1 className="ficha-titulo mb-3">{pelicula.titulo}</h1>
 
-            <div className="ficha-meta">
-              <span className="badge rounded-pill text-bg-dark">{anio}</span>
-              <span className="badge rounded-pill text-bg-secondary">
-                {formatearFecha(pelicula.fechaEstreno)}
-              </span>
-              <span className="badge rounded-pill text-bg-secondary">
-                {formatearDuracion(pelicula.duracion)}
-              </span>
-            </div>
+                <div className="ficha-generos mb-0">
+                  <Stack
+                    direction="horizontal"
+                    gap={2}
+                    className="meta-text align-items-center flex-wrap"
+                  >
+                    <Badge bg="secondary" pill className="ficha-tag-fecha">
+                      {anio}
+                    </Badge>
+                    <Badge bg="secondary" pill className="ficha-tag-fecha">
+                      {formatearDuracion(pelicula.duracion)}
+                    </Badge>
+                    {pelicula.genero.map((item) => (
+                      <div key={item} className="d-flex align-items-center">
+                        <Badge pill bg="dark" className="ficha-tag">
+                          {item}
+                        </Badge>
+                      </div>
+                    ))}
+                  </Stack>
+                </div>
+              </div>
 
-            <div className="ficha-generos">
-              {pelicula.genero.map((item) => (
-                <span key={item} className="ficha-tag">
-                  {item}
-                </span>
-              ))}
-            </div>
+              <div className="valoracion-circular">
+                <div className="valoracion-anillo">
+                  {puntuacionMedia !== null ? (
+                    <>
+                      <svg viewBox="0 0 36 36" className="valoracion-svg">
+                        <path
+                          className="anillo-fondo"
+                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                        />
+                        <path
+                          className="anillo-progreso"
+                          stroke={obtenerColorProgreso(puntuacionMedia)}
+                          strokeDasharray={`${puntuacionMedia * 10}, 100`}
+                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                        />
+                      </svg>
+                      <div className="valoracion-porcentaje">
+                        {Number(puntuacionMedia).toFixed(1)}
+                      </div>
+                    </>
+                  ) : (
+                    <Spinner animation="border" size="sm" variant="light" />
+                  )}
+                </div>
+              </div>
+            </Stack>
 
             <p className="ficha-sinopsis">{pelicula.sinopsis}</p>
 
             <div className="ficha-acciones">
-              <Link to="/" className="btn btn-light btn-lg">
-                Volver al catálogo
-              </Link>
-              <a
-                href={`https://www.google.com/search?q=${encodeURIComponent(
-                  pelicula.titulo,
-                )}+tráiler`}
-                target="_blank"
-                rel="noreferrer"
-                className="btn btn-outline-light btn-lg"
-              >
-                Ver tráiler
-              </a>
-              <span className="badge text-bg-dark border">
-                {Number(puntuacionMedia).toFixed(1)}
-              </span>
+              <Stack direction="horizontal" gap={2} className="flex-wrap">
+                <Button
+                  href={`https://www.google.com/search?q=${encodeURIComponent(pelicula.titulo)}+tráiler`}
+                  target="_blank"
+                  rel="noreferrer"
+                  variant="outline-light"
+                  size="lg"
+                >
+                  <i class="bi bi-play me-2"></i>
+                  Ver tráiler
+                </Button>
+              </Stack>
             </div>
           </div>
         </div>
-        <Row>
+
+        {/* Sección de Comentarios */}
+        <Row className="mt-4">
           <Col md={7}>
             <ListadoComentarios
               id={pelicula.id}
@@ -137,7 +185,7 @@ export default function FichaPeliculaDetalle({ pelicula }) {
           </Col>
           <Col></Col>
         </Row>
-      </article>
+      </Container>
     </section>
   );
 }
