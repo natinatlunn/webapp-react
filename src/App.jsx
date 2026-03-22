@@ -7,10 +7,10 @@ import AutContext from "./store/AutContext";
 // páginas
 import AvisoLegal from "./pages/AvisoLegal/AvisoLegal";
 import InfoContacto from "./pages/InfoContacto/InfoContacto";
-import PeliculasCategoria from "./pages/PeliculasCategoria";
+import PeliculasCategoria from "./pages/PeliculasCategorias/PeliculasCategoria";
 import PaginaPrincipal from "./pages/PaginaPrincipal";
 import FichaPelicula from "./pages/FichaPelicula";
-import Favoritos from "./pages/Favoritos";
+import Favoritos from "./pages/Favoritos/Favoritos";
 // elementos bootstrap
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";

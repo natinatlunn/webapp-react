@@ -1,6 +1,6 @@
 import peliculas from "../../data/peliculas.json";
 import TarjetaPelicula from "../../components/tarjetaPelicula/TarjetaPelicula";
-import "../components/ListadoPeliculas/ListadoPeliculas.css";
+import "../../components/ListadoPeliculas/ListadoPeliculas.css";
 import { useContext } from "react";
 import AutContext from "../../store/AutContext";
 import { Container } from "react-bootstrap";
