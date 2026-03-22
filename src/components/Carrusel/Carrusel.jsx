@@ -1,66 +1,52 @@
-import { useState } from "react";
+import { Carousel, Container, Image } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import peliculas from "../../data/peliculas.json";
 import "./Carrusel.css";
-import { Link } from "react-router-dom";
-import { Button, Image, Container } from "react-bootstrap";
 
 const Carrusel = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
   const primerasPeliculas = peliculas.slice(0, 3);
 
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? primerasPeliculas.length - 1 : prevIndex - 1,
-    );
-  };
-
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === primerasPeliculas.length - 1 ? 0 : prevIndex + 1,
-    );
-  };
-
-  const peliculaActual = primerasPeliculas[currentIndex];
-
   return (
-    <Container
-      className="carrusel"
-      as="section"
-      aria-label="Carrusel de peliculas destacadas"
-    >
-      <Button
-        onClick={handlePrev}
-        className="carrusel-btn prev"
-        aria-label="Película anterior"
-        variant="light"
+    <Container className="carrusel-container py-3" as="section">
+      <Carousel
+        indicators={false}
+        interval={5000}
+        pause="hover"
+        prevIcon={<i className="bi bi-chevron-left nav-icon-custom" />}
+        nextIcon={<i className="bi bi-chevron-right nav-icon-custom" />}
+        className="main-carousel shadow-sm"
       >
-        ❮
-      </Button>
+        {primerasPeliculas.map((pelicula) => (
+          <Carousel.Item key={pelicula.id}>
+            <Link
+              to={`/ficha/${pelicula.id}`}
+              className="d-block position-relative carrusel-link"
+            >
+              <div className="carrusel-image-container">
+                <Image
+                  src={`/images/carousel/${pelicula.portada}`}
+                  alt={pelicula.titulo}
+                  className="d-block w-100 carrusel-img-refined"
+                />
 
-      <Link
-        to={`/ficha/${peliculaActual.id}`}
-        className="carrusel-container carrusel-link"
-      >
-        <Image
-          src={`/images/portadas/${peliculaActual.portada}`}
-          alt={peliculaActual.titulo}
-          className="carrusel-image"
-          fluid
-        />
-        <div className="carrusel-info">
-          <h2>{peliculaActual.titulo}</h2>
-          <p>{peliculaActual.sinopsis}</p>
-        </div>
-      </Link>
+                <div className="carrusel-overlay-gradient"></div>
+              </div>
 
-      <Button
-        onClick={handleNext}
-        className="carrusel-btn next"
-        aria-label="Siguiente película"
-        variant="light"
-      >
-        ❯
-      </Button>
+              <Carousel.Caption className="custom-caption text-start px-4">
+                <h2 className="display-6 fw-light text-white mt-1 mb-2">
+                  {pelicula.titulo}
+                </h2>
+                <p
+                  className="fw-light small d-none d-md-block text-white-50 lh-base"
+                  style={{ maxWidth: "500px" }}
+                >
+                  {pelicula.sinopsis}
+                </p>
+              </Carousel.Caption>
+            </Link>
+          </Carousel.Item>
+        ))}
+      </Carousel>
     </Container>
   );
 };
