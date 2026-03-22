@@ -2,20 +2,32 @@
   padding: 1.5rem;
 }
 
-.peliculas-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 300px);
-  justify-content: center;
-  gap: 1.5rem;
+.btn-control-listado {
+  color: #6c757d !important;
+  transition: color 0.2s ease;
 }
 
-@media (max-width: 767px) {
-  .peliculas-layout {
-    padding: 1rem;
-  }
+.btn-control-listado:hover {
+  color: #0d6efd !important;
+}
 
-  .peliculas-grid {
-    grid-template-columns: minmax(0, min(100%, 300px));
-    gap: 1rem;
-  }
+.icon-arrow-small {
+  font-size: 0.8rem;
+  -webkit-text-stroke: 0.5px;
+}
+
+.label-control {
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+}
+
+.peliculas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2.5rem;
+  padding-left: 0.5rem;
+}
+
+.ls-1-5 {
+  letter-spacing: 1.5px;
 }
