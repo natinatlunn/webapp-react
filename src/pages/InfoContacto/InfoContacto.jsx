@@ -1,10 +1,13 @@
 import { Container, Row, Col, Card } from "react-bootstrap";
+import "./InfoContacto.css";
 
 function InfoContacto() {
   return (
     <Container className="py-3 my-3">
       <div className="text-center mb-5">
-        <h1 className="fw-bold text-dark display-5">Información de contacto</h1>
+        <h1 className="fw-light text-dark display-5 mt-3">
+          Información de contacto
+        </h1>
         <p className="text-muted fs-5">
           Si tienes alguna pregunta o necesitas asistencia, no dudes en
           contactarnos

@@ -5,8 +5,8 @@ import axios from "axios";
 import { Routes, Route } from "react-router-dom";
 import AutContext from "./store/AutContext";
 // páginas
-import AvisoLegal from "./pages/AvisoLegal";
-import InfoContacto from "./pages/InfoContacto";
+import AvisoLegal from "./pages/AvisoLegal/AvisoLegal";
+import InfoContacto from "./pages/InfoContacto/InfoContacto";
 import PeliculasCategoria from "./pages/PeliculasCategoria";
 import PaginaPrincipal from "./pages/PaginaPrincipal";
 import FichaPelicula from "./pages/FichaPelicula";
