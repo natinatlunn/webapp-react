@@ -225,15 +225,6 @@ function InicioSesion({ onInicioSesion, onCerrarSesion }) {
               >
                 Entrar ahora
               </Button>
-              {/* <div className="w-100 text-center mt-3">
-                <Link
-                  to="/registro"
-                  className="text-muted small text-decoration-none hover-dark"
-                >
-                  ¿No tienes cuenta?{" "}
-                  <span className="text-primary fw-bold">Regístrate</span>
-                </Link>
-              </div> */}
             </Modal.Footer>
           </Form>
         </div>
